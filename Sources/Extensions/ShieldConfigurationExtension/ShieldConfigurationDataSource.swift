@@ -71,7 +71,12 @@ class ShieldConfigurationDataSource: ShieldConfigurationDataSource {
         // token with the stored quota data
         return quotas.first { quota in
             // Match based on bundle identifier or other app characteristics
-            quota.displayName.lowercased().contains(application.localizedDisplayName?.lowercased() ?? "")
+        // Match using the application's unique identifier (e.g., bundleIdentifier)
+        guard let bundleIdentifier = application.bundleIdentifier else {
+            return nil
+        }
+        return quotas.first { quota in
+            quota.bundleIdentifier == bundleIdentifier
         }
     }
     
