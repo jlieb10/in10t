@@ -50,7 +50,15 @@ class AuthService: ObservableObject {
         return UserProfile(
             uid: result.user.uid,
             email: result.user.email ?? credential.email,
-            displayName: result.user.displayName ?? [credential.fullName?.givenName, credential.fullName?.familyName].compactMap { $0 }.joined(separator: " "),
+        let resolvedDisplayName = result.user.displayName
+            ?? [credential.fullName?.givenName, credential.fullName?.familyName]
+                .compactMap { $0 }
+                .joined(separator: " ")
+        
+        return UserProfile(
+            uid: result.user.uid,
+            email: result.user.email ?? credential.email,
+            displayName: resolvedDisplayName,
             creationDate: result.user.metadata.creationDate ?? Date(),
             lastSignIn: result.user.metadata.lastSignInDate ?? Date(),
             subscriptionStatus: .free
