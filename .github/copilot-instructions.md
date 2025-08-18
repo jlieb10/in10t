@@ -504,3 +504,107 @@ xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 
 - Ensure Screen Time permissions still granted
 - Validate Live Activities appear during sessions
 - Check cloud sync still functions
+
+## Quick Reference Commands
+
+### Essential Build Commands (Copy-Paste Ready)
+```bash
+# Clean build everything - takes 20-25 minutes. NEVER CANCEL. Set timeout to 90+ minutes.
+xcodebuild clean build -project Intentional.xcodeproj -alltargets -destination 'platform=iOS Simulator,name=iPhone 15'
+
+# Run unit tests - takes 10-15 minutes. NEVER CANCEL. Set timeout to 45+ minutes.
+xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+
+# Build for physical device - takes 15-20 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
+xcodebuild build -project Intentional.xcodeproj -scheme Intentional -destination 'generic/platform=iOS'
+
+# Clear all caches when build issues occur - takes 3-5 minutes. NEVER CANCEL. Set timeout to 20+ minutes.
+rm -rf ~/Library/Developer/Xcode/DerivedData && rm -rf ~/Library/Caches/org.swift.swiftpm && xcodebuild -resolvePackageDependencies -project Intentional.xcodeproj
+```
+
+### Project Inspection Commands
+```bash
+# List all available schemes and targets
+xcodebuild -list -project Intentional.xcodeproj
+
+# Show build settings for main target
+xcodebuild -showBuildSettings -project Intentional.xcodeproj -target Intentional
+
+# List available simulators
+xcrun simctl list devices available | grep iPhone
+
+# Check bundle identifiers for all targets
+xcodebuild -showBuildSettings -project Intentional.xcodeproj | grep PRODUCT_BUNDLE_IDENTIFIER
+```
+
+## Development Tips
+
+### When Adding New Features
+1. Always add to appropriate feature module under `Sources/App/Features/`
+2. Follow MVVM pattern - create View, ViewModel, and Model files
+3. Add to dependency injection container in `Sources/App/Environment/`
+4. Update unit tests if test infrastructure exists
+5. Test on physical device if feature uses Screen Time APIs
+
+### When Modifying Screen Time Functionality
+1. **ALWAYS test on physical device** - Screen Time APIs don't work in Simulator
+2. Check that Family Controls authorization is still granted
+3. Verify App Group container access still works
+4. Test all 3 app extensions still function correctly
+5. Monitor system logs for Screen Time API errors
+
+### When Working with Authentication
+1. Test all auth providers: Apple, Google, Email
+2. Verify Firebase configuration in `GoogleService-Info.plist`  
+3. Test sign-out/sign-in flow to ensure data persistence
+4. Check cloud sync functionality after auth changes
+5. Test account deletion flow if modified
+
+### When Updating Dependencies
+1. Always use Xcode's Package Manager UI: File → Packages → Update to Latest Package Versions
+2. Test build after dependency updates - takes 15-25 minutes for clean build
+3. Verify Firebase and Google Sign-In still work after updates
+4. Check for breaking API changes in updated dependencies
+5. Test on physical device to ensure Screen Time APIs still function
+
+### Common File Operations Reference
+```bash
+# Find all Swift files in project
+find Sources -name "*.swift" | wc -l
+
+# Search for specific functionality
+grep -r "FamilyControls" Sources/
+grep -r "Firebase" Sources/
+
+# View project structure 
+tree Sources/ -d
+
+# Check git status and recent changes
+git status && git log --oneline -10
+```
+
+## Emergency Troubleshooting
+
+### When Nothing Builds
+1. Clean everything: `xcodebuild clean -project Intentional.xcodeproj`
+2. Quit Xcode completely
+3. Delete derived data: `rm -rf ~/Library/Developer/Xcode/DerivedData`  
+4. Clear SPM cache: `rm -rf ~/Library/Caches/org.swift.swiftpm`
+5. Restart Xcode and let it re-index
+6. Reset Package Cache: File → Packages → Reset Package Caches
+7. Try build again (takes 20-25 minutes)
+
+### When Screen Time APIs Stop Working
+1. Verify physical device is being used (not Simulator)
+2. Check Family Controls permission: Settings → Screen Time → Family Controls
+3. Verify App Group: `group.com.jlieb10.intentional` exists and is enabled
+4. Check all bundle IDs are correctly signed with development team
+5. Try deleting and reinstalling app on device
+6. Check Apple Developer Portal for entitlement status
+
+### When Tests Fail After Changes
+1. Run individual test to isolate failure
+2. Check if failure is simulator vs device specific  
+3. Verify authentication flow still works (many tests depend on it)
+4. Check if Firebase configuration is correct
+5. Run clean build before running tests again
