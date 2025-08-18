@@ -189,7 +189,14 @@ class StoreKitService: ObservableObject {
     // MARK: - Cancellation (directs to App Store)
     
     func openSubscriptionManagement() {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+        // Find the key window's windowScene
+        guard
+            let windowScene = UIApplication.shared
+                .connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first(where: { $0.activationState == .foregroundActive }),
+            let _ = windowScene.windows.first(where: { $0.isKeyWindow })
+        else {
             return
         }
         
