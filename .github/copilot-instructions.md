@@ -84,22 +84,49 @@ Once the app has functionality, always test these scenarios after making changes
 
 ## Repository Structure Expectations
 
-When code is added to this repository, expect to see:
+This repository contains the "in10t" (Intentional) iOS app - a session-based screen time control app using Screen Time APIs:
+
 ```
 /
-├── in10t.xcodeproj/          # Xcode project file
-├── in10t/                    # Main app source code
-│   ├── AppDelegate.swift
-│   ├── SceneDelegate.swift
-│   ├── ViewController.swift
-│   └── Info.plist
-├── in10tTests/              # Unit tests
-├── in10tUITests/            # UI tests
-├── Podfile                  # CocoaPods dependencies (if used)
-├── Package.swift            # Swift Package Manager (if used)
+├── Intentional.xcodeproj/         # Xcode project file
+├── Package.swift                  # Swift Package Manager dependencies
+├── Sources/
+│   ├── App/                      # Main iOS app target
+│   │   ├── IntentionalApp.swift
+│   │   ├── Environment/
+│   │   ├── Features/
+│   │   │   ├── Auth/            # Authentication (Apple/Google/Email)
+│   │   │   ├── Onboarding/      # Welcome and permissions
+│   │   │   ├── Quotas/          # App quota management
+│   │   │   ├── Today/           # Daily usage dashboard
+│   │   │   ├── Session/         # Active session management
+│   │   │   ├── Paywall/         # StoreKit subscriptions
+│   │   │   ├── Logs/            # Usage history
+│   │   │   └── Settings/        # User preferences
+│   │   └── Services/
+│   │       ├── ScreenTime/      # FamilyControls, ManagedSettings
+│   │       ├── Persistence/     # Local + Cloud storage
+│   │       └── Notifications/   # Local notifications
+│   ├── Extensions/
+│   │   ├── DeviceActivityMonitorExtension/
+│   │   ├── ShieldConfigurationExtension/
+│   │   └── ShieldActionExtension/
+│   └── Widgets/                 # Home Screen widgets
+├── Tests/
+│   ├── Unit/
+│   └── UITests/
+├── fastlane/                    # Deployment automation
 ├── README.md
 └── .gitignore
 ```
+
+**Key Technical Details:**
+- **Minimum iOS:** 17.0+ (required for latest Screen Time APIs)
+- **Primary Frameworks:** SwiftUI, FamilyControls, ManagedSettings, DeviceActivity, ActivityKit, StoreKit 2
+- **Architecture:** MVVM with dependency injection
+- **Authentication:** Sign in with Apple, Google Sign-In, Firebase Auth
+- **Storage:** App Group UserDefaults + Firebase/Supabase cloud sync
+- **Extensions Required:** DeviceActivityMonitor, ShieldConfiguration, ShieldAction
 
 ## Timing Expectations and Timeouts
 
@@ -130,11 +157,36 @@ When code is added to this repository, expect to see:
 - CocoaPods cache issues: `pod cache clean --all && pod install`
 - SPM cache issues: Delete Package.resolved and reset package caches in Xcode
 
-## Current Status: Repository Not Yet Populated
-This repository currently contains only configuration files. When actual iOS project files are added:
-1. Update these instructions with project-specific details
-2. Add specific scheme names and target information
-3. Include any custom build configurations or scripts
-4. Document any project-specific validation requirements
+## Current Status: Full iOS App Implementation
+
+This repository contains the complete "in10t" (Intentional) iOS app implementation featuring:
+
+**Core Features:**
+- Session-based app usage control via Screen Time APIs
+- Live Activity countdown timers during active sessions  
+- Freemium model with StoreKit 2 subscriptions
+- Multi-provider authentication (Apple, Google, Email)
+- Cloud sync with Firebase/Supabase
+- Streak tracking and usage analytics
+
+**Technical Implementation:**
+- **Main App:** SwiftUI-based with MVVM architecture
+- **Extensions:** DeviceActivityMonitor, ShieldConfiguration, ShieldAction
+- **Live Activities:** Dynamic Island and Lock Screen countdown display
+- **Screen Time Integration:** FamilyControls for app selection, ManagedSettings for blocking
+- **Cloud Storage:** Encrypted user data with indefinite retention until manual deletion
+
+**Development Notes:**
+1. Requires iOS 17+ and Family Controls entitlement from Apple
+2. Must test on physical device (Screen Time APIs don't work in Simulator)
+3. Need Apple Developer Program membership for proper testing
+4. App Extensions require separate bundle identifiers and provisioning profiles
+
+**Building and Testing:**
+- Use `Intentional.xcodeproj` (not the generic in10t name referenced in base instructions)
+- Main scheme: "Intentional" 
+- Extension schemes: "DeviceActivityMonitorExtension", "ShieldConfigurationExtension", "ShieldActionExtension"
+- Required physical device testing for Screen Time functionality
+- Cloud services require API keys configuration (see Environment/ folder)
 
 Always build and test thoroughly after making any code changes to ensure iOS app functionality remains intact.
