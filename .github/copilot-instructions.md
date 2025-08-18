@@ -15,7 +15,8 @@ This repository contains a complete iOS app implementation with:
 ALWAYS run these commands in exact order:
 1. **Clone and open repository**:
    ```bash
-   git clone https://github.com/jlieb10/in10t.git
+   # Replace <your-repository-url> with your fork or the canonical repo as appropriate
+   git clone <your-repository-url>
    cd in10t
    open Intentional.xcodeproj
    ```
