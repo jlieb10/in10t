@@ -49,7 +49,7 @@ struct AuthenticationView: View {
                     // Google Sign In
                     Button(action: signInWithGoogle) {
                         HStack {
-                            Image("google-logo") // You'll need to add this asset
+                            Image(systemName: "globe")
                                 .resizable()
                                 .frame(width: 20, height: 20)
                             Text("Continue with Google")
