@@ -121,7 +121,7 @@ struct SessionCardView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
-                    .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+                    .onReceive(timerService.$currentDate) { _ in
                         updateTimeRemaining()
                     }
             }
