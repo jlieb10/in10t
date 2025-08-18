@@ -1,192 +1,616 @@
-# in10t - iOS Development Project
+# Intentional - iOS Screen Time Control App
 
 Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.
 
 ## Current Repository State
-This repository is currently in initial setup phase with only basic configuration files:
-- README.md (minimal project description)
-- .gitignore (configured for iOS/Xcode/Swift development)
-- No source code or Xcode project files exist yet
+This repository contains a complete iOS app implementation with:
+- Intentional.xcodeproj (Xcode project)
+- 27 Swift source files across main app and 3 extensions
+- Swift Package Manager dependencies (Firebase, Google Sign-In)
+- Complete feature modules for Screen Time control functionality
 
 ## Working Effectively
 
-### Initial Setup (when project files are added)
-When Xcode project files are present, follow these steps:
-- Open the repository in Xcode: `open *.xcodeproj` or `open *.xcworkspace` (if using CocoaPods/SPM)
-- Install dependencies if Package.swift exists: Xcode will automatically resolve Swift Package Manager dependencies
-- If Podfile exists: `pod install` -- takes 2-5 minutes typically. NEVER CANCEL. Set timeout to 15+ minutes.
-- If Cartfile exists: `carthage update --platform iOS` -- takes 5-15 minutes. NEVER CANCEL. Set timeout to 30+ minutes.
+### Initial Setup
+ALWAYS run these commands in exact order:
+1. **Clone and open repository**:
+   ```bash
+   # Replace <your-repository-url> with your fork or the canonical repo as appropriate
+   git clone <your-repository-url>
+   cd in10t
+   open Intentional.xcodeproj
+   ```
+
+2. **Resolve Swift Package Manager dependencies**:
+   - Xcode automatically resolves dependencies on first build
+   - If issues occur: File → Packages → Reset Package Caches
+   - Dependencies: Firebase SDK (Auth, Firestore), Google Sign-In
 
 ### Building the Project
-Once Xcode project files exist:
-- Build from Xcode: Product → Build (⌘+B)
-- Build from command line: `xcodebuild -project *.xcodeproj -scheme [SCHEME_NAME] -destination 'platform=iOS Simulator,name=iPhone 15' build` -- takes 3-10 minutes. NEVER CANCEL. Set timeout to 20+ minutes.
-- If using workspace: `xcodebuild -workspace *.xcworkspace -scheme [SCHEME_NAME] -destination 'platform=iOS Simulator,name=iPhone 15' build`
+**CRITICAL**: Set timeout to 60+ minutes for all build commands. NEVER CANCEL builds before completion.
+
+1. **Build from Xcode** (RECOMMENDED):
+   ```
+   Product → Build (⌘+B)
+   ```
+   - First build: 10-15 minutes. NEVER CANCEL.
+   - Incremental builds: 1-2 minutes
+
+2. **Build from command line**:
+   ```bash
+   # Main app target - takes 10-15 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
+   xcodebuild -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15' build
+   
+   # Main app target - takes 10-15 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
+   # Timeout is set conservatively to account for possible delays in dependency resolution, network issues, or CI/CD resource contention.
+   xcodebuild -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15' build
+   
+   # All targets including extensions - takes 15-20 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
+   # Timeout is set conservatively to account for possible delays in dependency resolution, network issues, or CI/CD resource contention.
+   xcodebuild -project Intentional.xcodeproj -alltargets -destination 'platform=iOS Simulator,name=iPhone 15' build
+   ```
 
 ### Testing
-When test files are present:
-- Run tests in Xcode: Product → Test (⌘+U)
-- Run tests from command line: `xcodebuild test -project *.xcodeproj -scheme [SCHEME_NAME] -destination 'platform=iOS Simulator,name=iPhone 15'` -- takes 5-20 minutes depending on test suite size. NEVER CANCEL. Set timeout to 30+ minutes.
-- Run specific test: `xcodebuild test -project *.xcodeproj -scheme [SCHEME_NAME] -destination 'platform=iOS Simulator,name=iPhone 15' -only-testing:[TARGET_NAME]/[TEST_CLASS]/[TEST_METHOD]`
+**CRITICAL**: Set timeout to 90+ minutes for test commands. NEVER CANCEL tests before completion.
 
-### Development Workflow
-- Always ensure iOS Simulator is available before running builds or tests
-- Use appropriate iOS deployment targets based on project configuration
-- Check project settings for minimum iOS version requirements
-- When adding new Swift files, ensure they're added to the correct target membership
+1. **Unit Tests** (Simulator only):
+   ```bash
+   # Takes 5-10 minutes. NEVER CANCEL. Set timeout to 30+ minutes.
+   xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+   ```
+
+2. **Physical Device Testing** (REQUIRED for Screen Time APIs):
+   ```bash
+   # Replace iPhone-15 with your device name. Takes 10-15 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
+   xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS,name=Your-Device-Name'
+   ```
+
+3. **Manual Testing Scenarios** (REQUIRED after any changes):
+   - Launch app and complete sign-in flow
+   - Grant Family Controls permission
+   - Select apps using FamilyActivityPicker
+   - Start a session and verify Live Activity appears
+   - Test shield screens when apps are blocked
+   - Verify cloud sync by signing out/in
 
 ## Validation Requirements
 
 ### Pre-commit Validation
-Always run these validation steps before committing changes:
-- Build the project successfully without warnings
-- Run all unit tests and ensure they pass
-- Check for Swift lint issues if SwiftLint is configured
-- Verify app launches successfully in iOS Simulator
-- Test key user flows manually in the simulator
+ALWAYS run these validation steps before committing changes:
 
-### Manual Testing Scenarios
-Once the app has functionality, always test these scenarios after making changes:
-- App launch and initial screen display
-- Navigation between main screens
-- Core feature functionality specific to the app's purpose
-- Memory usage and performance in iOS Simulator
+1. **Build validation**:
+   ```bash
+   # Clean build - takes 15-20 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
+   xcodebuild clean build -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+   ```
+
+2. **Test validation**:
+   ```bash
+   # Unit tests - takes 10-15 minutes. NEVER CANCEL. Set timeout to 45+ minutes.
+   xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+   ```
+
+3. **SwiftLint validation** (if configured):
+   ```bash
+   # Install if not present
+   brew install swiftlint
+   # Run linting - takes 30-60 seconds
+   swiftlint
+   ```
+
+4. **Package dependency validation**:
+   ```bash
+   # Resolve packages - takes 2-5 minutes. NEVER CANCEL. Set timeout to 15+ minutes.
+   xcodebuild -resolvePackageDependencies -project Intentional.xcodeproj
+   ```
+
+### MANDATORY Manual Testing Scenarios
+**CRITICAL**: These scenarios MUST be tested on physical device after ANY changes:
+
+1. **Authentication Flow**:
+   - Launch app → Sign in with Apple → Verify cloud sync
+   - Sign out → Sign in with Google → Verify data persistence
+   - Create email account → Test password reset flow
+
+2. **Onboarding Flow**:
+   - Grant Family Controls permission (may require developer profile)
+   - Select 3+ apps using FamilyActivityPicker
+   - Configure session quotas (duration, daily limits)
+   - Complete onboarding and reach main dashboard
+
+3. **Session Management**:
+   - Start session for selected app → Verify Live Activity appears
+   - Open managed app → Verify shield screen appears
+   - Wait for session end → Verify app becomes blocked
+   - Test grace period for Pro users (if applicable)
+
+4. **Subscription Flow**:
+   - Navigate to paywall → Test subscription purchase
+   - Verify Pro features unlock after purchase
+   - Test subscription management and cancellation
+
+5. **Data Persistence**:
+   - Create session logs → Sign out → Sign in → Verify data synced
+   - Test offline usage → Come back online → Verify sync
 
 ## iOS Development Environment Requirements
 
 ### Required Tools
-- Xcode (latest stable version recommended)
-- iOS Simulator (comes with Xcode)
-- Command Line Tools: `xcode-select --install`
+**CRITICAL**: Install these tools in exact order:
+
+1. **Xcode 15.0+** with iOS 17.0+ SDK:
+   - Download from Mac App Store or developer.apple.com
+   - Install iOS 17.0+ simulators: Xcode → Window → Devices and Simulators → Simulators → "+"
+
+2. **Command Line Tools**:
+   ```bash
+   xcode-select --install
+   ```
+
+3. **Apple Developer Program membership** (REQUIRED):
+   - Family Controls entitlement requires approval from Apple
+   - Physical device testing requires paid membership
+   - App extensions require proper provisioning profiles
 
 ### Optional but Recommended Tools
-- CocoaPods: `sudo gem install cocoapods` (if Podfile exists)
-- Carthage: `brew install carthage` (if Cartfile exists)
-- SwiftLint: `brew install swiftlint` (for code quality)
+```bash
+# SwiftLint for code quality
+brew install swiftlint
+
+# Fastlane for deployment automation
+sudo gem install fastlane
+```
+
+### Environment Setup Verification
+Run these commands to verify setup:
+
+```bash
+# Verify Xcode installation
+xcode-select --version
+xcodebuild -version
+
+# List available simulators
+xcrun simctl list devices available | grep iPhone
+
+# Verify Swift Package Manager
+swift package --version
+```
 
 ## Common iOS Development Commands
 
 ### Project Information
-- List available schemes: `xcodebuild -list -project *.xcodeproj`
-- List simulators: `xcrun simctl list devices available`
-- Get project info: `xcodebuild -showBuildSettings -project *.xcodeproj`
+```bash
+# List all schemes and targets
+xcodebuild -list -project Intentional.xcodeproj
+
+# Show build settings
+xcodebuild -showBuildSettings -project Intentional.xcodeproj -target Intentional
+
+# List available simulators
+xcrun simctl list devices available
+```
 
 ### Dependency Management
-- Update Swift Package Manager dependencies: Open Xcode → File → Packages → Update to Latest Package Versions
-- Install CocoaPods dependencies: `pod install`
-- Update CocoaPods dependencies: `pod update`
-- Install Carthage dependencies: `carthage bootstrap --platform iOS`
+**CRITICAL**: Swift Package Manager is used (NOT CocoaPods/Carthage)
+
+```bash
+# Reset package cache if issues occur - takes 2-3 minutes. NEVER CANCEL. Set timeout to 10+ minutes.
+rm -rf ~/Library/Developer/Xcode/DerivedData
+xcodebuild -resolvePackageDependencies -project Intentional.xcodeproj
+
+# Update packages (in Xcode): File → Packages → Update to Latest Package Versions
+```
 
 ### Simulator Management
-- Boot simulator: `xcrun simctl boot "iPhone 15"`
-- List running simulators: `xcrun simctl list devices booted`
-- Reset simulator: `xcrun simctl erase all`
+```bash
+# Boot specific simulator - takes 30-60 seconds
+xcrun simctl boot "iPhone 15"
 
-## Repository Structure Expectations
+# List running simulators
+xcrun simctl list devices booted
 
-This repository contains the "in10t" (Intentional) iOS app - a session-based screen time control app using Screen Time APIs:
+# Reset simulator if issues occur
+xcrun simctl erase "iPhone 15"
+
+# Shutdown all simulators
+xcrun simctl shutdown all
+```
+
+### Build Troubleshooting
+```bash
+# Clean build folder - takes 1-2 minutes
+xcodebuild clean -project Intentional.xcodeproj -scheme Intentional
+
+# Delete derived data
+rm -rf ~/Library/Developer/Xcode/DerivedData
+
+# Clear Swift package cache
+rm -rf ~/Library/Caches/org.swift.swiftpm
+```
+
+## Repository Structure
+
+This repository contains the "Intentional" iOS app - a complete session-based screen time control application using iOS Screen Time APIs:
 
 ```
 /
 ├── Intentional.xcodeproj/         # Xcode project file
 ├── Package.swift                  # Swift Package Manager dependencies
 ├── Sources/
-│   ├── App/                      # Main iOS app target
-│   │   ├── IntentionalApp.swift
-│   │   ├── Environment/
-│   │   ├── Features/
-│   │   │   ├── Auth/            # Authentication (Apple/Google/Email)
-│   │   │   ├── Onboarding/      # Welcome and permissions
-│   │   │   ├── Quotas/          # App quota management
-│   │   │   ├── Today/           # Daily usage dashboard
-│   │   │   ├── Session/         # Active session management
-│   │   │   ├── Paywall/         # StoreKit subscriptions
-│   │   │   ├── Logs/            # Usage history
-│   │   │   └── Settings/        # User preferences
-│   │   └── Services/
-│   │       ├── ScreenTime/      # FamilyControls, ManagedSettings
-│   │       ├── Persistence/     # Local + Cloud storage
-│   │       └── Notifications/   # Local notifications
-│   ├── Extensions/
-│   │   ├── DeviceActivityMonitorExtension/
-│   │   ├── ShieldConfigurationExtension/
-│   │   └── ShieldActionExtension/
-│   └── Widgets/                 # Home Screen widgets
-├── Tests/
-│   ├── Unit/
-│   └── UITests/
-├── fastlane/                    # Deployment automation
-├── README.md
-└── .gitignore
+│   ├── App/                      # Main iOS app target (27 Swift files)
+│   │   ├── IntentionalApp.swift   # App entry point with Firebase config
+│   │   ├── Environment/           # Dependency injection container
+│   │   ├── Features/             # Feature-based modules:
+│   │   │   ├── Auth/             # Apple/Google/Email authentication
+│   │   │   ├── Onboarding/       # Welcome flow & Family Controls permissions
+│   │   │   ├── Quotas/           # App selection & quota management
+│   │   │   ├── Today/            # Main dashboard with usage stats
+│   │   │   ├── Session/          # Active session management & Live Activities
+│   │   │   ├── Paywall/          # StoreKit 2 subscriptions & billing
+│   │   │   ├── Logs/             # Usage history & analytics
+│   │   │   └── Settings/         # User preferences & account management
+│   │   └── Services/             # Core business logic:
+│   │       ├── ScreenTime/       # FamilyControls, ManagedSettings APIs
+│   │       ├── Persistence/      # Local storage + Firebase cloud sync
+│   │       └── Notifications/    # Local notifications for sessions
+│   ├── Extensions/               # Required App Extensions:
+│   │   ├── DeviceActivityMonitorExtension/  # Monitor app usage events
+│   │   ├── ShieldConfigurationExtension/    # Configure app blocking UI
+│   │   └── ShieldActionExtension/           # Handle user actions on shields
+│   └── Core/                     # Shared models and utilities
+├── README.md                     # Project overview and setup instructions
+├── DEVELOPMENT.md                # Detailed development guide
+└── .gitignore                    # Git ignore rules for iOS/Xcode
 ```
 
-**Key Technical Details:**
-- **Minimum iOS:** 17.0+ (required for latest Screen Time APIs)
-- **Primary Frameworks:** SwiftUI, FamilyControls, ManagedSettings, DeviceActivity, ActivityKit, StoreKit 2
-- **Architecture:** MVVM with dependency injection
-- **Authentication:** Sign in with Apple, Google Sign-In, Firebase Auth
-- **Storage:** App Group UserDefaults + Firebase/Supabase cloud sync
-- **Extensions Required:** DeviceActivityMonitor, ShieldConfiguration, ShieldAction
+### Key Technical Details
+- **Minimum iOS**: 17.0+ (REQUIRED for latest Screen Time APIs)
+- **Language**: Swift 5.9+ with SwiftUI
+- **Architecture**: MVVM with dependency injection
+- **Primary Frameworks**: 
+  - FamilyControls (app selection & management)
+  - ManagedSettings (app blocking configuration)
+  - DeviceActivity (usage monitoring)
+  - ActivityKit (Live Activities for countdown timers)
+  - StoreKit 2 (subscriptions)
+  - AuthenticationServices (Sign in with Apple)
+- **Dependencies**: Firebase Auth, Firebase Firestore, Google Sign-In
+- **Extensions Required**: 3 app extensions for Screen Time functionality
+- **Bundle IDs**:
+  - Main: `com.jlieb10.intentional`
+  - DeviceActivityMonitor: `com.jlieb10.intentional.DeviceActivityMonitor`
+  - ShieldConfiguration: `com.jlieb10.intentional.ShieldConfiguration`
+  - ShieldAction: `com.jlieb10.intentional.ShieldAction`
 
 ## Timing Expectations and Timeouts
 
-### Critical Timing Information
-- **Pod install**: 2-5 minutes typical, up to 15 minutes with many dependencies. NEVER CANCEL.
-- **Carthage update**: 5-15 minutes typical, up to 30 minutes with large frameworks. NEVER CANCEL.
-- **Xcode build**: 3-10 minutes for clean build, 30 seconds for incremental. NEVER CANCEL builds before 20 minutes.
-- **Test suite**: 5-20 minutes depending on coverage and UI tests. NEVER CANCEL before 30 minutes.
-- **Simulator boot**: 30-60 seconds typically.
+### CRITICAL Timing Information - NEVER CANCEL These Operations
 
-### Recommended Timeout Values
-- Build commands: Set timeout to 20+ minutes minimum
-- Test commands: Set timeout to 30+ minutes minimum
-- Dependency installation: Set timeout to 30+ minutes minimum
+**Build Operations:**
+- **Clean build**: 15-20 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
+- **Incremental build**: 1-3 minutes. NEVER CANCEL. Set timeout to 10+ minutes.
+- **All targets build**: 20-25 minutes. NEVER CANCEL. Set timeout to 90+ minutes.
+- **Extension builds**: 5-10 minutes each. NEVER CANCEL. Set timeout to 30+ minutes per extension.
+
+**Testing Operations:**
+- **Unit tests**: 10-15 minutes. NEVER CANCEL. Set timeout to 45+ minutes.
+- **Integration tests**: 15-25 minutes. NEVER CANCEL. Set timeout to 90+ minutes.
+- **Full test suite**: 25-35 minutes. NEVER CANCEL. Set timeout to 120+ minutes.
+- **Physical device tests**: 20-30 minutes. NEVER CANCEL. Set timeout to 90+ minutes.
+
+**Dependency Resolution:**
+- **Swift Package Manager**: 3-8 minutes. NEVER CANCEL. Set timeout to 30+ minutes.
+- **Package cache reset**: 2-5 minutes. NEVER CANCEL. Set timeout to 20+ minutes.
+- **First-time dependency fetch**: 10-15 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
+
+**Development Operations:**
+- **Simulator boot**: 30-90 seconds. Set timeout to 5+ minutes.
+- **App installation on device**: 2-5 minutes. NEVER CANCEL. Set timeout to 15+ minutes.
+- **Xcode project opening**: 1-3 minutes for initial indexing.
+
+### Recommended Minimum Timeout Values
+- **Build commands**: 60+ minutes minimum
+- **Test commands**: 90+ minutes minimum  
+- **Package resolution**: 30+ minutes minimum
+- **Device operations**: 15+ minutes minimum
+
+### Why These Operations Take Time
+- **Screen Time APIs**: Require complex entitlement verification
+- **3 App Extensions**: Each built and signed separately
+- **Firebase Dependencies**: Large framework compilation
+- **SwiftUI Preview**: Compilation cache generation
+- **Code Signing**: Multiple bundle ID validation
 
 ## Troubleshooting Common Issues
 
 ### Build Issues
-- Clean build folder: Product → Clean Build Folder (⌘+Shift+K) in Xcode
-- Delete derived data: `rm -rf ~/Library/Developer/Xcode/DerivedData`
-- Reset Package Cache: File → Packages → Reset Package Caches in Xcode
+
+#### Swift Package Manager Resolution Failure
+```
+Error: Package resolution failed / Dependencies could not be resolved
+```
+**Solution**:
+```bash
+# Clear all caches - takes 3-5 minutes. NEVER CANCEL. Set timeout to 20+ minutes.
+rm -rf ~/Library/Developer/Xcode/DerivedData
+rm -rf ~/Library/Caches/org.swift.swiftpm
+# Re-resolve in Xcode: File → Packages → Reset Package Caches
+xcodebuild -resolvePackageDependencies -project Intentional.xcodeproj
+```
+
+#### Family Controls Entitlement Missing
+```
+Error: Provisioning profile doesn't include the Family Controls capability
+```
+**Solution**: 
+- Request Family Controls entitlement from Apple Developer Portal (can take 1-2 weeks for approval)
+- Ensure all bundle IDs have the entitlement enabled
+- Regenerate provisioning profiles after entitlement approval
+
+#### App Extensions Build Failure
+```
+Error: Extension bundle identifier does not match expected format
+```
+**Solution**:
+```bash
+# Verify bundle IDs match expected format:
+# Main: com.jlieb10.intentional
+# Extensions: com.jlieb10.intentional.[ExtensionName]
+xcodebuild -showBuildSettings -project Intentional.xcodeproj | grep PRODUCT_BUNDLE_IDENTIFIER
+```
+
+#### Code Signing Issues
+```
+Error: Code signing failed / No valid provisioning profile found
+```
+**Solution**:
+- Select development team for ALL targets (main app + 3 extensions)
+- Ensure App Group ID exists: `group.com.jlieb10.intentional`
+- Add App Group capability to all targets
+
+### Runtime Issues
+
+#### Screen Time APIs Not Working
+**Symptoms**: Shield screens don't appear, apps not blocked, Family Controls authorization fails
+
+**Solutions**:
+- **CRITICAL**: Must use physical device (Screen Time APIs don't work in Simulator)
+- Grant Family Controls permission: Settings → Screen Time → Family Controls
+- Verify App Group container access
+- Check system logs:
+```bash
+log stream --predicate 'subsystem == "com.apple.ScreenTimeAgent"'
+```
+
+#### Firebase Authentication Failures
+**Symptoms**: Sign-in fails, cloud sync doesn't work
+
+**Solutions**:
+- Add `GoogleService-Info.plist` to Xcode project
+- Verify Firebase project configuration
+- Enable Authentication methods in Firebase Console
+- Check network connectivity
+
+#### Live Activities Not Appearing
+**Symptoms**: Session countdowns don't show in Dynamic Island
+
+**Solutions**:
+- Ensure ActivityKit framework is linked
+- Verify Live Activities entitlement is enabled
+- Test on iOS 16.1+ device (required for Live Activities)
+- Check notification permissions are granted
 
 ### Simulator Issues
-- If simulator won't boot: `xcrun simctl shutdown all && xcrun simctl boot "iPhone 15"`
-- If simulator is unresponsive: Reset simulator content and settings
 
-### Dependency Issues
-- CocoaPods cache issues: `pod cache clean --all && pod install`
-- SPM cache issues: Delete Package.resolved and reset package caches in Xcode
+#### Simulator Won't Boot
+```bash
+# Reset and restart simulator - takes 2-3 minutes
+xcrun simctl shutdown all
+xcrun simctl erase all
+xcrun simctl boot "iPhone 15"
+```
 
-## Current Status: Full iOS App Implementation
+#### Simulator Performance Issues
+```bash
+# Reset simulator content and settings
+xcrun simctl erase "iPhone 15"
+# Or use: Device → Erase All Content and Settings in Simulator menu
+```
 
-This repository contains the complete "in10t" (Intentional) iOS app implementation featuring:
+## Special Requirements for Screen Time APIs
 
-**Core Features:**
-- Session-based app usage control via Screen Time APIs
-- Live Activity countdown timers during active sessions  
-- Freemium model with StoreKit 2 subscriptions
-- Multi-provider authentication (Apple, Google, Email)
-- Cloud sync with Firebase/Supabase
-- Streak tracking and usage analytics
+### CRITICAL Physical Device Requirements
+**Screen Time APIs DO NOT WORK in iOS Simulator**. ALL Screen Time functionality testing MUST be done on physical device.
 
-**Technical Implementation:**
-- **Main App:** SwiftUI-based with MVVM architecture
-- **Extensions:** DeviceActivityMonitor, ShieldConfiguration, ShieldAction
-- **Live Activities:** Dynamic Island and Lock Screen countdown display
-- **Screen Time Integration:** FamilyControls for app selection, ManagedSettings for blocking
-- **Cloud Storage:** Encrypted user data with indefinite retention until manual deletion
+### Required Entitlements (Must Be Approved by Apple)
+1. **Family Controls** - Request from Apple Developer Portal
+2. **App Groups** - `group.com.jlieb10.intentional`  
+3. **ActivityKit** - For Live Activities countdown timers
 
-**Development Notes:**
-1. Requires iOS 17+ and Family Controls entitlement from Apple
-2. Must test on physical device (Screen Time APIs don't work in Simulator)
-3. Need Apple Developer Program membership for proper testing
-4. App Extensions require separate bundle identifiers and provisioning profiles
+### Development Team Setup Requirements
+1. **Apple Developer Program membership** (paid account required)
+2. **Family Controls entitlement approval** (submit request to Apple, 1-2 weeks processing)
+3. **Proper code signing** for all 4 targets (main app + 3 extensions)
+4. **Physical iOS 17+ device** for testing
 
-**Building and Testing:**
-- Use `Intentional.xcodeproj` (not the generic in10t name referenced in base instructions)
-- Main scheme: "Intentional" 
-- Extension schemes: "DeviceActivityMonitorExtension", "ShieldConfigurationExtension", "ShieldActionExtension"
-- Required physical device testing for Screen Time functionality
-- Cloud services require API keys configuration (see Environment/ folder)
+### Device Testing Checklist
+Before testing ANY Screen Time functionality:
+- [ ] Deploy to physical device (iOS 17+)
+- [ ] Grant Family Controls permission in Settings → Screen Time → Family Controls
+- [ ] Sign in to test cloud authentication
+- [ ] Complete onboarding to select managed apps
+- [ ] Test session start/end cycle with Live Activities
+- [ ] Verify shield screens appear when apps are blocked
 
-Always build and test thoroughly after making any code changes to ensure iOS app functionality remains intact.
+### Screen Time API Debugging
+```bash
+# Monitor Screen Time system logs on device
+log stream --predicate 'subsystem == "com.apple.ScreenTimeAgent"'
+
+# Check Family Controls authorization status  
+log stream --predicate 'subsystem == "com.apple.FamilyControls"'
+
+# Monitor extension activity
+log stream --predicate 'subsystem CONTAINS "intentional"'
+```
+
+## Common Validation Workflows
+
+### After Making Code Changes
+ALWAYS run this complete validation sequence:
+
+1. **Clean Build** (15-20 minutes):
+   ```bash
+   xcodebuild clean build -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+   ```
+
+2. **Unit Tests** (10-15 minutes):
+   ```bash
+   xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+   ```
+
+3. **Physical Device Deploy and Test** (MANDATORY for Screen Time features):
+   - Build and run on physical device
+   - Test changed functionality manually
+   - Verify Screen Time APIs still work correctly
+
+4. **SwiftLint Check** (if configured):
+   ```bash
+   swiftlint
+   ```
+
+### Before Committing Changes
+Run complete validation suite:
+```bash
+# Full clean build with all targets - takes 20-25 minutes. NEVER CANCEL. Set timeout to 90+ minutes.
+xcodebuild clean build -project Intentional.xcodeproj -alltargets -destination 'platform=iOS Simulator,name=iPhone 15'
+
+# Complete test suite - takes 25-35 minutes. NEVER CANCEL. Set timeout to 120+ minutes.
+xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+```
+
+## Key File Locations to Know
+
+### Most Frequently Modified Files
+- `Sources/App/IntentionalApp.swift` - App entry point and configuration
+- `Sources/App/Features/*/` - All feature modules (Auth, Session, Today, etc.)
+- `Sources/App/Services/ScreenTime/` - Core Screen Time API integration
+- `Sources/App/Environment/` - Dependency injection and app state
+- `Sources/Extensions/*/` - App extensions for Screen Time functionality
+
+### Configuration Files
+- `Package.swift` - Swift Package Manager dependencies
+- `Intentional.xcodeproj/project.pbxproj` - Xcode project configuration
+- `Sources/App/Environment/FirebaseConfig.swift` - Firebase setup
+- `.gitignore` - Configured for iOS development
+
+### Always Check These After Changes
+- Verify all 4 targets still build successfully
+- Test authentication flow on device
+- Ensure Screen Time permissions still granted
+- Validate Live Activities appear during sessions
+- Check cloud sync still functions
+
+## Quick Reference Commands
+
+### Essential Build Commands (Copy-Paste Ready)
+```bash
+# Clean build everything - takes 20-25 minutes. NEVER CANCEL. Set timeout to 90+ minutes.
+xcodebuild clean build -project Intentional.xcodeproj -alltargets -destination 'platform=iOS Simulator,name=iPhone 15'
+
+# Run unit tests - takes 10-15 minutes. NEVER CANCEL. Set timeout to 45+ minutes.
+xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+
+# Build for physical device - takes 15-20 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
+xcodebuild build -project Intentional.xcodeproj -scheme Intentional -destination 'generic/platform=iOS'
+
+# Clear all caches when build issues occur - takes 3-5 minutes. NEVER CANCEL. Set timeout to 20+ minutes.
+rm -rf ~/Library/Developer/Xcode/DerivedData && rm -rf ~/Library/Caches/org.swift.swiftpm && xcodebuild -resolvePackageDependencies -project Intentional.xcodeproj
+```
+
+### Project Inspection Commands
+```bash
+# List all available schemes and targets
+xcodebuild -list -project Intentional.xcodeproj
+
+# Show build settings for main target
+xcodebuild -showBuildSettings -project Intentional.xcodeproj -target Intentional
+
+# List available simulators
+xcrun simctl list devices available | grep iPhone
+
+# Check bundle identifiers for all targets
+xcodebuild -showBuildSettings -project Intentional.xcodeproj | grep PRODUCT_BUNDLE_IDENTIFIER
+```
+
+## Development Tips
+
+### When Adding New Features
+1. Always add to appropriate feature module under `Sources/App/Features/`
+2. Follow MVVM pattern - create View, ViewModel, and Model files
+3. Add to dependency injection container in `Sources/App/Environment/`
+4. Update unit tests if test infrastructure exists
+5. Test on physical device if feature uses Screen Time APIs
+
+### When Modifying Screen Time Functionality
+1. **ALWAYS test on physical device** - Screen Time APIs don't work in Simulator
+2. Check that Family Controls authorization is still granted
+3. Verify App Group container access still works
+4. Test all 3 app extensions still function correctly
+5. Monitor system logs for Screen Time API errors
+
+### When Working with Authentication
+1. Test all auth providers: Apple, Google, Email
+2. Verify Firebase configuration in `GoogleService-Info.plist`  
+3. Test sign-out/sign-in flow to ensure data persistence
+4. Check cloud sync functionality after auth changes
+5. Test account deletion flow if modified
+
+### When Updating Dependencies
+1. Always use Xcode's Package Manager UI: File → Packages → Update to Latest Package Versions
+2. Test build after dependency updates - takes 15-25 minutes for clean build
+3. Verify Firebase and Google Sign-In still work after updates
+4. Check for breaking API changes in updated dependencies
+5. Test on physical device to ensure Screen Time APIs still function
+
+### Common File Operations Reference
+```bash
+# Find all Swift files in project
+find Sources -name "*.swift" | wc -l
+
+# Search for specific functionality
+grep -r "FamilyControls" Sources/
+grep -r "Firebase" Sources/
+
+# View project structure 
+tree Sources/ -d
+
+# Check git status and recent changes
+git status && git log --oneline -10
+```
+
+## Emergency Troubleshooting
+
+### When Nothing Builds
+1. Clean everything: `xcodebuild clean -project Intentional.xcodeproj`
+2. Quit Xcode completely
+3. Delete derived data: `rm -rf ~/Library/Developer/Xcode/DerivedData`  
+4. Clear SPM cache: `rm -rf ~/Library/Caches/org.swift.swiftpm`
+5. Restart Xcode and let it re-index
+6. Reset Package Cache: File → Packages → Reset Package Caches
+7. Try build again (takes 20-25 minutes)
+
+### When Screen Time APIs Stop Working
+1. Verify physical device is being used (not Simulator)
+2. Check Family Controls permission: Settings → Screen Time → Family Controls
+3. Verify App Group: `group.com.jlieb10.intentional` exists and is enabled
+4. Check all bundle IDs are correctly signed with development team
+5. Try deleting and reinstalling app on device
+6. Check Apple Developer Portal for entitlement status
+
+### When Tests Fail After Changes
+1. Run individual test to isolate failure
+2. Check if failure is simulator vs device specific  
+3. Verify authentication flow still works (many tests depend on it)
+4. Check if Firebase configuration is correct
+5. Run clean build before running tests again
