@@ -40,7 +40,12 @@ ALWAYS run these commands in exact order:
    # Main app target - takes 10-15 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
    xcodebuild -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15' build
    
+   # Main app target - takes 10-15 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
+   # Timeout is set conservatively to account for possible delays in dependency resolution, network issues, or CI/CD resource contention.
+   xcodebuild -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15' build
+   
    # All targets including extensions - takes 15-20 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
+   # Timeout is set conservatively to account for possible delays in dependency resolution, network issues, or CI/CD resource contention.
    xcodebuild -project Intentional.xcodeproj -alltargets -destination 'platform=iOS Simulator,name=iPhone 15' build
    ```
 
