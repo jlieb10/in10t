@@ -126,7 +126,8 @@ class ShieldActionExtension: ShieldActionExtension {
             let quotas = try JSONDecoder().decode([AppQuotaData].self, from: data)
             return quotas.first { quota in
                 // Match app by display name - in production, you'd use better matching
-                quota.displayName.lowercased() == application.localizedDisplayName?.lowercased()
+                // Match app by stable identifier (e.g., bundleIdentifier or token)
+                quota.bundleIdentifier == application.bundleIdentifier
             }
         } catch {
             return nil
