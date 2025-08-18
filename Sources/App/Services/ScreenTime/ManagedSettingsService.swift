@@ -125,7 +125,17 @@ class ManagedSettingsService: ObservableObject {
     
     private func scheduleSessionEnd(for quota: AppQuota, at endTime: Date) {
         let timer = Timer(fireAt: endTime, interval: 0, target: self, selector: #selector(handleSessionEnd), userInfo: quota.id, repeats: false)
-        RunLoop.main.add(timer, forMode: .common)
+        let interval = endTime.timeIntervalSinceNow
+        guard interval > 0 else {
+            // If the end time is in the past, end the session immediately
+            self.endSession(for: quota)
+            return
+        }
+        Timer.scheduledTimer(withTimeInterval: interval, repeats: false) { [weak self] _ in
+            guard let self = self else { return }
+            self.endSession(for: quota)
+            NotificationCenter.default.post(name: .sessionEnded, object: quota.id)
+        }
     }
     
     @objc private func handleSessionEnd(_ timer: Timer) {
