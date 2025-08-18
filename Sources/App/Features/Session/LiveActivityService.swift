@@ -11,7 +11,6 @@ class LiveActivityService: ObservableObject {
     
     // MARK: - Live Activity Management
     
-    @available(iOS 16.1, *)
     func startSessionActivity(appName: String, duration: TimeInterval) async throws -> String {
         let attributes = SessionCountdownAttributes(appName: appName)
         let initialState = SessionCountdownAttributes.ContentState(
