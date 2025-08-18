@@ -185,7 +185,28 @@ class SessionManager: ObservableObject {
         guard let endOfDay = calendar.dateInterval(of: .day, for: Date())?.end else { return }
         
         let timer = Timer(fireAt: endOfDay, interval: 0, target: self, selector: #selector(updateStreakStatus), userInfo: nil, repeats: false)
-        RunLoop.main.add(timer, forMode: .common)
+        let interval = endTime.timeIntervalSinceNow
+        guard interval > 0 else {
+            // If the end time is in the past, end the session immediately
+            endSession(for: appId)
+            return
+        }
+        Timer.scheduledTimer(withTimeInterval: interval, repeats: false) { [weak self] _ in
+            self?.endSession(for: appId)
+        }
+    }
+    
+        guard let endOfDay = calendar.dateInterval(of: .day, for: Date())?.end else { return }
+        
+        let interval = endOfDay.timeIntervalSinceNow
+        guard interval > 0 else {
+            // If end of day is in the past, update streak status immediately
+            updateStreakStatus()
+            return
+        }
+        Timer.scheduledTimer(withTimeInterval: interval, repeats: false) { [weak self] _ in
+            self?.updateStreakStatus()
+        }
     }
     
     @objc private func updateStreakStatus() {
