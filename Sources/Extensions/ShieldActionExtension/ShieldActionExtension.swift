@@ -48,7 +48,7 @@ class ShieldActionExtension: ShieldActionExtension {
     // MARK: - Action Handlers
     
     private func handlePrimaryButtonPressed(for application: Application, completionHandler: @escaping (ShieldActionResponse) -> Void) {
-        let defaults = UserDefaults(suiteName: "group.com.jlieb10.intentional")
+        let defaults = UserDefaults(suiteName: "group.com.jlieb10.in10t")
         
         // Find the app quota for this application
         guard let appQuota = findAppQuota(for: application, in: defaults) else {
@@ -82,7 +82,7 @@ class ShieldActionExtension: ShieldActionExtension {
     
     private func handlePrimaryButtonPressed(for applicationCategory: ApplicationCategory, completionHandler: @escaping (ShieldActionResponse) -> Void) {
         // Similar logic for categories
-        let defaults = UserDefaults(suiteName: "group.com.jlieb10.intentional")
+        let defaults = UserDefaults(suiteName: "group.com.jlieb10.in10t")
         
         if let categoryQuota = findCategoryQuota(for: applicationCategory, in: defaults) {
             let usage = getDailyUsage(for: categoryQuota.id, in: defaults)
@@ -229,7 +229,7 @@ class ShieldActionExtension: ShieldActionExtension {
     }
     
     private func logShieldAction(_ action: String, appId: String) {
-        let defaults = UserDefaults(suiteName: "group.com.jlieb10.intentional")
+        let defaults = UserDefaults(suiteName: "group.com.jlieb10.in10t")
         
         let logEntry: [String: Any] = [
             "action": action,
