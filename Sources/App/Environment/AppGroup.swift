@@ -2,7 +2,7 @@ import Foundation
 
 /// App Group configuration for sharing data between main app and extensions
 enum AppGroup {
-    static let identifier = "group.com.jlieb10.intentional"
+    static let identifier = "group.com.jlieb10.in10t"
     
     static var userDefaults: UserDefaults {
         guard let defaults = UserDefaults(suiteName: identifier) else {
@@ -32,11 +32,11 @@ enum UserDefaultsKeys {
 
 /// Bundle identifiers for the app and extensions
 enum BundleIdentifiers {
-    static let mainApp = "com.jlieb10.intentional"
-    static let deviceActivityMonitor = "com.jlieb10.intentional.DeviceActivityMonitor"
-    static let shieldConfiguration = "com.jlieb10.intentional.ShieldConfiguration"
-    static let shieldAction = "com.jlieb10.intentional.ShieldAction"
-    static let widgets = "com.jlieb10.intentional.Widgets"
+    static let mainApp = "com.jlieb10.in10t"
+    static let deviceActivityMonitor = "com.jlieb10.in10t.DeviceActivityMonitor"
+    static let shieldConfiguration = "com.jlieb10.in10t.ShieldConfiguration"
+    static let shieldAction = "com.jlieb10.in10t.ShieldAction"
+    static let widgets = "com.jlieb10.in10t.Widgets"
 }
 
 /// Firebase and external service configuration

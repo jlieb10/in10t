@@ -1,0 +1,1052 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1000001 /* IntentionalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001 /* IntentionalApp.swift */; };
+		A1000002 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000002 /* AppGroup.swift */; };
+		A1000003 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000003 /* DIContainer.swift */; };
+		A1000004 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000004 /* AuthService.swift */; };
+		A1000005 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000005 /* AuthenticationView.swift */; };
+		A1000006 /* EmailSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000006 /* EmailSignInView.swift */; };
+		A1000007 /* SessionLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000007 /* SessionLogView.swift */; };
+		A1000008 /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000008 /* OnboardingFlow.swift */; };
+		A1000009 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000009 /* PaywallView.swift */; };
+		A1000010 /* StoreKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000010 /* StoreKitService.swift */; };
+		A1000011 /* QuotaEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000011 /* QuotaEditorView.swift */; };
+		A1000012 /* QuotaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000012 /* QuotaListView.swift */; };
+		A1000013 /* LiveActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000013 /* LiveActivityService.swift */; };
+		A1000014 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000014 /* SessionManager.swift */; };
+		A1000015 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000015 /* SettingsView.swift */; };
+		A1000016 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000016 /* MainTabView.swift */; };
+		A1000017 /* SessionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000017 /* SessionCardView.swift */; };
+		A1000018 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000018 /* NotificationService.swift */; };
+		A1000019 /* CloudStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000019 /* CloudStore.swift */; };
+		A1000020 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000020 /* LocalStore.swift */; };
+		A1000021 /* FamilyControlsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000021 /* FamilyControlsService.swift */; };
+		A1000022 /* ManagedSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000022 /* ManagedSettingsService.swift */; };
+		A1000023 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000023 /* Models.swift */; };
+		
+		B1000001 /* DeviceActivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000001 /* DeviceActivityMonitor.swift */; };
+		C1000001 /* ShieldConfigurationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2000001 /* ShieldConfigurationDataSource.swift */; };
+		D1000001 /* ShieldActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2000001 /* ShieldActionExtension.swift */; };
+		
+		/* Firebase Dependencies */
+		A1000100 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A3000100 /* FirebaseAuth */; };
+		A1000101 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A3000101 /* FirebaseFirestore */; };
+		A1000102 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = A3000102 /* GoogleSignIn */; };
+		A1000103 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A3000103 /* GoogleSignInSwift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A4000001 /* IN10T.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IN10T.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4000002 /* DeviceActivityMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DeviceActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4000003 /* ShieldConfiguration.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShieldConfiguration.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4000004 /* ShieldAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShieldAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		
+		A2000001 /* IntentionalApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentionalApp.swift; sourceTree = "<group>"; };
+		A2000002 /* AppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		A2000003 /* DIContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		A2000004 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		A2000005 /* AuthenticationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		A2000006 /* EmailSignInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSignInView.swift; sourceTree = "<group>"; };
+		A2000007 /* SessionLogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionLogView.swift; sourceTree = "<group>"; };
+		A2000008 /* OnboardingFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
+		A2000009 /* PaywallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		A2000010 /* StoreKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreKitService.swift; sourceTree = "<group>"; };
+		A2000011 /* QuotaEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaEditorView.swift; sourceTree = "<group>"; };
+		A2000012 /* QuotaListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaListView.swift; sourceTree = "<group>"; };
+		A2000013 /* LiveActivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveActivityService.swift; sourceTree = "<group>"; };
+		A2000014 /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		A2000015 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A2000016 /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		A2000017 /* SessionCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionCardView.swift; sourceTree = "<group>"; };
+		A2000018 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		A2000019 /* CloudStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStore.swift; sourceTree = "<group>"; };
+		A2000020 /* LocalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
+		A2000021 /* FamilyControlsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyControlsService.swift; sourceTree = "<group>"; };
+		A2000022 /* ManagedSettingsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedSettingsService.swift; sourceTree = "<group>"; };
+		A2000023 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		
+		B2000001 /* DeviceActivityMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitor.swift; sourceTree = "<group>"; };
+		C2000001 /* ShieldConfigurationDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShieldConfigurationDataSource.swift; sourceTree = "<group>"; };
+		D2000001 /* ShieldActionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShieldActionExtension.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A5000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000100 /* FirebaseAuth in Frameworks */,
+				A1000101 /* FirebaseFirestore in Frameworks */,
+				A1000102 /* GoogleSignIn in Frameworks */,
+				A1000103 /* GoogleSignInSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A6000001 = {
+			isa = PBXGroup;
+			children = (
+				A6000002 /* Sources */,
+				A6000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A6000002 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A6000004 /* App */,
+				A6000005 /* Core */,
+				A6000006 /* Extensions */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		A6000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4000001 /* IN10T.app */,
+				A4000002 /* DeviceActivityMonitor.appex */,
+				A4000003 /* ShieldConfiguration.appex */,
+				A4000004 /* ShieldAction.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A6000004 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A2000001 /* IntentionalApp.swift */,
+				A6000007 /* Environment */,
+				A6000008 /* Features */,
+				A6000009 /* Services */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A6000005 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A2000023 /* Models.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		A6000006 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A6000010 /* DeviceActivityMonitorExtension */,
+				A6000011 /* ShieldConfigurationExtension */,
+				A6000012 /* ShieldActionExtension */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A6000007 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				A2000002 /* AppGroup.swift */,
+				A2000003 /* DIContainer.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		A6000008 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				A6000013 /* Auth */,
+				A6000014 /* Logs */,
+				A6000015 /* Onboarding */,
+				A6000016 /* Paywall */,
+				A6000017 /* Quotas */,
+				A6000018 /* Session */,
+				A6000019 /* Settings */,
+				A6000020 /* Today */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		A6000009 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A6000021 /* Notifications */,
+				A6000022 /* Persistence */,
+				A6000023 /* ScreenTime */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A6000010 /* DeviceActivityMonitorExtension */ = {
+			isa = PBXGroup;
+			children = (
+				B2000001 /* DeviceActivityMonitor.swift */,
+			);
+			path = DeviceActivityMonitorExtension;
+			sourceTree = "<group>";
+		};
+		A6000011 /* ShieldConfigurationExtension */ = {
+			isa = PBXGroup;
+			children = (
+				C2000001 /* ShieldConfigurationDataSource.swift */,
+			);
+			path = ShieldConfigurationExtension;
+			sourceTree = "<group>";
+		};
+		A6000012 /* ShieldActionExtension */ = {
+			isa = PBXGroup;
+			children = (
+				D2000001 /* ShieldActionExtension.swift */,
+			);
+			path = ShieldActionExtension;
+			sourceTree = "<group>";
+		};
+		A6000013 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A2000004 /* AuthService.swift */,
+				A2000005 /* AuthenticationView.swift */,
+				A2000006 /* EmailSignInView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		A6000014 /* Logs */ = {
+			isa = PBXGroup;
+			children = (
+				A2000007 /* SessionLogView.swift */,
+			);
+			path = Logs;
+			sourceTree = "<group>";
+		};
+		A6000015 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A2000008 /* OnboardingFlow.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		A6000016 /* Paywall */ = {
+			isa = PBXGroup;
+			children = (
+				A2000009 /* PaywallView.swift */,
+				A2000010 /* StoreKitService.swift */,
+			);
+			path = Paywall;
+			sourceTree = "<group>";
+		};
+		A6000017 /* Quotas */ = {
+			isa = PBXGroup;
+			children = (
+				A2000011 /* QuotaEditorView.swift */,
+				A2000012 /* QuotaListView.swift */,
+			);
+			path = Quotas;
+			sourceTree = "<group>";
+		};
+		A6000018 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				A2000013 /* LiveActivityService.swift */,
+				A2000014 /* SessionManager.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		A6000019 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A2000015 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A6000020 /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				A2000016 /* MainTabView.swift */,
+				A2000017 /* SessionCardView.swift */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
+		A6000021 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				A2000018 /* NotificationService.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		A6000022 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				A2000019 /* CloudStore.swift */,
+				A2000020 /* LocalStore.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		A6000023 /* ScreenTime */ = {
+			isa = PBXGroup;
+			children = (
+				A2000021 /* FamilyControlsService.swift */,
+				A2000022 /* ManagedSettingsService.swift */,
+			);
+			path = ScreenTime;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A7000001 /* IN10T */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8000001 /* Build configuration list for PBXNativeTarget "IN10T" */;
+			buildPhases = (
+				A9000001 /* Sources */,
+				A5000001 /* Frameworks */,
+				A9000002 /* Resources */,
+				A9000003 /* Embed Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B7000002 /* PBXTargetDependency */,
+				C7000002 /* PBXTargetDependency */,
+				D7000002 /* PBXTargetDependency */,
+			);
+			name = IN10T;
+			packageProductDependencies = (
+				A3000100 /* FirebaseAuth */,
+				A3000101 /* FirebaseFirestore */,
+				A3000102 /* GoogleSignIn */,
+				A3000103 /* GoogleSignInSwift */,
+			);
+			productName = IN10T;
+			productReference = A4000001 /* IN10T.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B7000001 /* DeviceActivityMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B8000001 /* Build configuration list for PBXNativeTarget "DeviceActivityMonitor" */;
+			buildPhases = (
+				B9000001 /* Sources */,
+				B5000001 /* Frameworks */,
+				B9000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeviceActivityMonitor;
+			productName = DeviceActivityMonitor;
+			productReference = A4000002 /* DeviceActivityMonitor.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		C7000001 /* ShieldConfiguration */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C8000001 /* Build configuration list for PBXNativeTarget "ShieldConfiguration" */;
+			buildPhases = (
+				C9000001 /* Sources */,
+				C5000001 /* Frameworks */,
+				C9000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShieldConfiguration;
+			productName = ShieldConfiguration;
+			productReference = A4000003 /* ShieldConfiguration.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		D7000001 /* ShieldAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8000001 /* Build configuration list for PBXNativeTarget "ShieldAction" */;
+			buildPhases = (
+				D9000001 /* Sources */,
+				D5000001 /* Frameworks */,
+				D9000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShieldAction;
+			productName = ShieldAction;
+			productReference = A4000004 /* ShieldAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A0000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					A7000001 = {
+						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1540;
+					};
+					B7000001 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					C7000001 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					D7000001 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = A8000002 /* Build configuration list for PBXProject "IN10T" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A6000001;
+			packageReferences = (
+				A3000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A3000002 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
+			productRefGroup = A6000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A7000001 /* IN10T */,
+				B7000001 /* DeviceActivityMonitor */,
+				C7000001 /* ShieldConfiguration */,
+				D7000001 /* ShieldAction */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A9000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A9000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000001 /* IntentionalApp.swift in Sources */,
+				A1000002 /* AppGroup.swift in Sources */,
+				A1000003 /* DIContainer.swift in Sources */,
+				A1000004 /* AuthService.swift in Sources */,
+				A1000005 /* AuthenticationView.swift in Sources */,
+				A1000006 /* EmailSignInView.swift in Sources */,
+				A1000007 /* SessionLogView.swift in Sources */,
+				A1000008 /* OnboardingFlow.swift in Sources */,
+				A1000009 /* PaywallView.swift in Sources */,
+				A1000010 /* StoreKitService.swift in Sources */,
+				A1000011 /* QuotaEditorView.swift in Sources */,
+				A1000012 /* QuotaListView.swift in Sources */,
+				A1000013 /* LiveActivityService.swift in Sources */,
+				A1000014 /* SessionManager.swift in Sources */,
+				A1000015 /* SettingsView.swift in Sources */,
+				A1000016 /* MainTabView.swift in Sources */,
+				A1000017 /* SessionCardView.swift in Sources */,
+				A1000018 /* NotificationService.swift in Sources */,
+				A1000019 /* CloudStore.swift in Sources */,
+				A1000020 /* LocalStore.swift in Sources */,
+				A1000021 /* FamilyControlsService.swift in Sources */,
+				A1000022 /* ManagedSettingsService.swift in Sources */,
+				A1000023 /* Models.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1000001 /* DeviceActivityMonitor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1000001 /* ShieldConfigurationDataSource.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1000001 /* ShieldActionExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B7000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B7000001 /* DeviceActivityMonitor */;
+			targetProxy = B7000003 /* PBXContainerItemProxy */;
+		};
+		C7000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7000001 /* ShieldConfiguration */;
+			targetProxy = C7000003 /* PBXContainerItemProxy */;
+		};
+		D7000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7000001 /* ShieldAction */;
+			targetProxy = D7000003 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXContainerItemProxy section */
+		B7000003 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B7000001;
+			remoteInfo = DeviceActivityMonitor;
+		};
+		C7000003 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7000001;
+			remoteInfo = ShieldConfiguration;
+		};
+		D7000003 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7000001;
+			remoteInfo = ShieldAction;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A9000003 /* Embed Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A8000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A8000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A8000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "IN10T";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlieb10.in10t;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		A8000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "IN10T";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlieb10.in10t;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		B8000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = DeviceActivityMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlieb10.in10t.DeviceActivityMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		B8000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = DeviceActivityMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlieb10.in10t.DeviceActivityMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		C8000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ShieldConfiguration;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlieb10.in10t.ShieldConfiguration;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C8000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			
+		buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ShieldConfiguration;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlieb10.in10t.ShieldConfiguration;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D8000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ShieldAction;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlieb10.in10t.ShieldAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D8000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ShieldAction;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlieb10.in10t.ShieldAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A8000001 /* Build configuration list for PBXNativeTarget "IN10T" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8000005 /* Debug */,
+				A8000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A8000002 /* Build configuration list for PBXProject "IN10T" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8000003 /* Debug */,
+				A8000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B8000001 /* Build configuration list for PBXNativeTarget "DeviceActivityMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8000005 /* Debug */,
+				B8000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C8000001 /* Build configuration list for PBXNativeTarget "ShieldConfiguration" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C8000005 /* Debug */,
+				C8000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8000001 /* Build configuration list for PBXNativeTarget "ShieldAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8000005 /* Debug */,
+				D8000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A3000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		A3000002 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A3000100 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		A3000101 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		A3000102 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3000002 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		A3000103 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3000002 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A0000001 /* Project object */;
+}

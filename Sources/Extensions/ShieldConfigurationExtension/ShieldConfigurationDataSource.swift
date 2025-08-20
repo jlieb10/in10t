@@ -5,7 +5,7 @@ class ShieldConfigurationDataSource: ShieldConfigurationDataSource {
     
     override func configuration(shielding application: Application) -> ShieldConfiguration {
         // Load app-specific configuration from shared storage
-        let defaults = UserDefaults(suiteName: "group.com.jlieb10.intentional")
+        let defaults = UserDefaults(suiteName: "group.com.jlieb10.in10t")
         let appQuotas = loadAppQuotas(from: defaults)
         
         // Find the quota for this specific app
@@ -16,7 +16,7 @@ class ShieldConfigurationDataSource: ShieldConfigurationDataSource {
     
     override func configuration(shielding applicationCategory: ApplicationCategory) -> ShieldConfiguration {
         // Handle category-based shielding
-        let defaults = UserDefaults(suiteName: "group.com.jlieb10.intentional")
+        let defaults = UserDefaults(suiteName: "group.com.jlieb10.in10t")
         let appQuotas = loadAppQuotas(from: defaults)
         
         // Find quota for this category
@@ -147,7 +147,7 @@ class ShieldConfigurationDataSource: ShieldConfigurationDataSource {
     }
     
     private func getDailyUsage(for appId: String) -> DailyUsageData {
-        let defaults = UserDefaults(suiteName: "group.com.jlieb10.intentional")
+        let defaults = UserDefaults(suiteName: "group.com.jlieb10.in10t")
         guard let data = defaults?.data(forKey: "dailyUsage") else {
             return DailyUsageData(appId: appId, dateKey: todayKey(), sessionsUsed: 0)
         }

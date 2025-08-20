@@ -1,4 +1,4 @@
-# Intentional - Session-Based Screen Time Control
+# IN10T - Session-Based Screen Time Control
 
 Transform your relationship with technology through mindful, session-based app usage.
 
@@ -8,7 +8,7 @@ Transform your relationship with technology through mindful, session-based app u
 
 ## Overview
 
-Intentional is a comprehensive iOS app that helps users build healthy screen time habits through:
+IN10T is a comprehensive iOS app that helps users build healthy screen time habits through:
 
 - **Session-based app control** using iOS Screen Time APIs
 - **Live Activity countdown timers** in Dynamic Island and Lock Screen
@@ -67,8 +67,8 @@ The app follows a clean MVVM architecture with SwiftUI and leverages iOS 17's la
 ## Project Structure
 
 ```
-Intentional/
-├── Intentional.xcodeproj/         # Xcode project
+IN10T/
+├── IN10T.xcodeproj/               # Xcode project
 ├── Package.swift                  # Swift Package Manager
 ├── Sources/
 │   ├── App/                      # Main iOS app
@@ -115,17 +115,17 @@ Intentional/
 
 2. **Open in Xcode**:
    ```bash
-   open Intentional.xcodeproj
+   open IN10T.xcodeproj
    ```
 
 3. **Configure Bundle Identifiers**:
-   - Main app: `com.jlieb10.intentional`
-   - DeviceActivityMonitor: `com.jlieb10.intentional.DeviceActivityMonitor`
-   - ShieldConfiguration: `com.jlieb10.intentional.ShieldConfiguration`
-   - ShieldAction: `com.jlieb10.intentional.ShieldAction`
+   - Main app: `com.jlieb10.in10t`
+   - DeviceActivityMonitor: `com.jlieb10.in10t.DeviceActivityMonitor`
+   - ShieldConfiguration: `com.jlieb10.in10t.ShieldConfiguration`
+   - ShieldAction: `com.jlieb10.in10t.ShieldAction`
 
 4. **Set up App Groups**:
-   - Create App Group: `group.com.jlieb10.intentional`
+   - Create App Group: `group.com.jlieb10.in10t`
    - Add to all targets in Capabilities
 
 5. **Configure Entitlements**:
@@ -154,13 +154,28 @@ Intentional/
 
 ### Testing
 
-```bash
-# Run unit tests
-xcodebuild test -scheme Intentional -destination 'platform=iOS,name=iPhone 15'
+**🚨 IMPORTANT: Screen Time APIs require a physical iOS device (iOS 17+)**
 
-# Run UI tests
-xcodebuild test -scheme IntentionalUITests -destination 'platform=iOS,name=iPhone 15'
+```bash
+# Build for simulator (limited functionality)
+xcodebuild -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15' build
+
+# Build for physical device (full functionality) 
+xcodebuild -project IN10T.xcodeproj -scheme IN10T -destination 'generic/platform=iOS' build
+
+# Run unit tests
+xcodebuild test -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15'
 ```
+
+**Manual Testing Checklist:**
+1. ✅ App launches without crashes
+2. ✅ Firebase configuration loads (check console logs)
+3. ✅ Authentication screens appear
+4. ✅ Family Controls permission can be requested
+5. ✅ App selection screen (FamilyActivityPicker) works
+6. ✅ Sessions can be started/stopped
+7. ✅ Live Activities appear during sessions
+8. ✅ Shield screens block selected apps
 
 ## Usage Flow
 
@@ -217,10 +232,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- **Documentation**: [intentional.app/docs](https://intentional.app/docs)
-- **Support**: [intentional.app/support](https://intentional.app/support)
-- **Privacy**: [intentional.app/privacy](https://intentional.app/privacy)
-- **Terms**: [intentional.app/terms](https://intentional.app/terms)
+- **Documentation**: See [DEVELOPMENT.md](DEVELOPMENT.md) and this README
+- **Issues**: Report bugs and feature requests via [GitHub Issues](https://github.com/jlieb10/in10t/issues)  
+- **Discussions**: Join the conversation in [GitHub Discussions](https://github.com/jlieb10/in10t/discussions)
 
 ---
 

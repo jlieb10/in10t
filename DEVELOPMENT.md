@@ -17,14 +17,14 @@
 
 #### App Identifiers
 Create the following App IDs in Apple Developer Portal:
-- `com.jlieb10.intentional` (Main App)
-- `com.jlieb10.intentional.DeviceActivityMonitor`
-- `com.jlieb10.intentional.ShieldConfiguration`  
-- `com.jlieb10.intentional.ShieldAction`
+- `com.jlieb10.in10t` (Main App)
+- `com.jlieb10.in10t.DeviceActivityMonitor`
+- `com.jlieb10.in10t.ShieldConfiguration`  
+- `com.jlieb10.in10t.ShieldAction`
 
 #### Entitlements
 - **Family Controls**: Request this restricted entitlement from Apple
-- **App Groups**: `group.com.jlieb10.intentional`
+- **App Groups**: `group.com.jlieb10.in10t`
 - **Associated Domains**: If implementing Safari extension
 
 #### Provisioning Profiles
@@ -33,7 +33,7 @@ Create development and distribution profiles for all bundle IDs.
 ### 2. Firebase Setup
 
 1. Create a new Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
-2. Add an iOS app with bundle ID: `com.jlieb10.intentional`
+2. Add an iOS app with bundle ID: `com.jlieb10.in10t`
 3. Download `GoogleService-Info.plist` and add to Xcode project
 4. Enable the following services:
    - **Authentication**: Apple, Google, Email/Password
@@ -55,7 +55,7 @@ Create the following in-app purchases:
 - **Annual**: `intentional_pro_annual` - £29.99/year with 7-day trial
 
 #### App Information
-- **Bundle ID**: `com.jlieb10.intentional`
+- **Bundle ID**: `com.jlieb10.in10t`
 - **Category**: Productivity
 - **Age Rating**: 4+ (suitable for all ages)
 - **Privacy Policy URL**: Required for App Store submission
@@ -68,7 +68,7 @@ Create the following in-app purchases:
    ```bash
    git clone https://github.com/jlieb10/in10t.git
    cd in10t
-   open Intentional.xcodeproj
+   open IN10T.xcodeproj
    ```
 
 2. **Configure signing**:
@@ -208,14 +208,94 @@ xcodebuild -resolvePackageDependencies
 ### Runtime Issues
 
 #### Screen Time APIs Not Working
-- **Simulator**: Use physical device
-- **Permissions**: Check Family Controls authorization
-- **Extensions**: Verify all bundle IDs and signing
+- **Simulator**: Use physical device - Screen Time APIs don't work in Simulator
+- **Permissions**: Check Family Controls authorization in Settings → Screen Time → Family Controls
+- **Extensions**: Verify all bundle IDs and signing are correct
 
 #### Cloud Sync Issues
-- **Authentication**: Verify Firebase configuration
+- **Authentication**: Verify Firebase configuration or add GoogleService-Info.plist
 - **Network**: Check internet connectivity
 - **Firestore Rules**: Ensure read/write permissions
+
+#### "No Editor" or Missing Files in Xcode
+1. **Close Xcode completely**
+2. **Open the project directly**: `open IN10T.xcodeproj` (not Intentional.xcodeproj)
+3. **Select a file in Project Navigator** to show editor
+4. **If files appear red/missing**: 
+   - Select file → File Inspector → Location → Choose correct path under Sources/
+   - Or delete and re-add files using Add Files to "IN10T"
+
+#### Build Failures
+**"No such module 'Firebase'"**
+- Solution: File → Packages → Reset Package Caches, then clean build
+
+**"Family Controls entitlement missing"**
+- Solution: Request Family Controls entitlement from Apple Developer Portal (takes 1-2 weeks)
+
+**"App Group container not found"**
+- Solution: Verify App Group ID `group.com.jlieb10.in10t` exists in all target capabilities
+
+#### Project Won't Open or Compile
+1. **Clean everything**:
+   ```bash
+   # Delete derived data
+   rm -rf ~/Library/Developer/Xcode/DerivedData
+   
+   # Clear SPM cache  
+   rm -rf ~/Library/Caches/org.swift.swiftpm
+   ```
+
+2. **Reset packages in Xcode**: File → Packages → Reset Package Caches
+
+3. **Rebuild**: Product → Clean Build Folder, then Build
+
+## Beginner-Friendly Setup Guide
+
+### First-Time Xcode Setup
+
+1. **Install Xcode 15.0+** from Mac App Store
+2. **Install Command Line Tools**: `xcode-select --install`
+3. **Clone the repository**: `git clone https://github.com/jlieb10/in10t.git`
+4. **Open project**: `cd in10t && open IN10T.xcodeproj`
+
+### When You First Open the Project
+
+The project should now show all files properly organized under Sources/. If you see missing files or "No Editor":
+
+1. **Check you opened IN10T.xcodeproj** (not the old Intentional.xcodeproj.backup)
+2. **Select any Swift file** in the navigator to show the editor
+3. **If files are missing**: Delete and re-add from Sources/ directory
+
+### Development Team Setup
+
+1. **In Project Settings** → Select your development team for ALL targets:
+   - IN10T (main app)
+   - DeviceActivityMonitor  
+   - ShieldConfiguration
+   - ShieldAction
+
+2. **Add capabilities** for each target:
+   - App Groups: `group.com.jlieb10.in10t`
+   - Family Controls (main app only)
+
+### Testing Setup
+
+1. **Connect a physical iPhone** (iOS 17+)
+2. **Select device as run destination** (not Simulator)
+3. **Build and run** - first build takes 5-10 minutes
+4. **Grant permissions** when app launches
+
+### Common First-Build Issues
+
+**"Failed to resolve package dependencies"**
+- Wait for Xcode to finish downloading packages (5-10 minutes)
+- If stuck: File → Packages → Reset Package Caches
+
+**"No development team selected"**
+- Select your team in Project Settings → Signing & Capabilities for all 4 targets
+
+**"Provisioning profile doesn't match"**
+- Change bundle IDs if needed, or create App IDs in Apple Developer Portal
 
 ## Performance Guidelines
 

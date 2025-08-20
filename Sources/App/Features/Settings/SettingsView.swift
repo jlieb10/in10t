@@ -156,7 +156,7 @@ struct SettingsView: View {
     
     private var supportSection: some View {
         Section("Support") {
-            Link(destination: URL(string: "https://intentional.app/privacy")!) {
+            Link(destination: URL(string: "https://github.com/jlieb10/in10t")!) {
                 HStack {
                     Image(systemName: "hand.raised")
                         .foregroundColor(.green)
@@ -168,7 +168,7 @@ struct SettingsView: View {
                 }
             }
             
-            Link(destination: URL(string: "https://intentional.app/terms")!) {
+            Link(destination: URL(string: "https://github.com/jlieb10/in10t")!) {
                 HStack {
                     Image(systemName: "doc.text")
                         .foregroundColor(.blue)
@@ -180,7 +180,7 @@ struct SettingsView: View {
                 }
             }
             
-            Link(destination: URL(string: "https://intentional.app/support")!) {
+            Link(destination: URL(string: "https://github.com/jlieb10/in10t/issues")!) {
                 HStack {
                     Image(systemName: "questionmark.circle")
                         .foregroundColor(.orange)

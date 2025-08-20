@@ -67,7 +67,7 @@ class DeviceActivityMonitor: DeviceActivityMonitor {
     // MARK: - Private Methods
     
     private func updateActivityLog(activity: DeviceActivityName, event: String, details: String? = nil) {
-        let defaults = UserDefaults(suiteName: "group.com.jlieb10.intentional")
+        let defaults = UserDefaults(suiteName: "group.com.jlieb10.in10t")
         
         let logEntry: [String: Any] = [
             "activity": activity.rawValue,
@@ -92,7 +92,7 @@ class DeviceActivityMonitor: DeviceActivityMonitor {
         let appId = activity.rawValue
         
         // Update session end in shared storage
-        let defaults = UserDefaults(suiteName: "group.com.jlieb10.intentional")
+        let defaults = UserDefaults(suiteName: "group.com.jlieb10.in10t")
         
         var activeSessions = defaults?.object(forKey: "activeSessionsV2") as? [String: [String: Any]] ?? [:]
         
