@@ -154,13 +154,28 @@ IN10T/
 
 ### Testing
 
-```bash
-# Run unit tests
-xcodebuild test -scheme Intentional -destination 'platform=iOS,name=iPhone 15'
+**🚨 IMPORTANT: Screen Time APIs require a physical iOS device (iOS 17+)**
 
-# Run UI tests
-xcodebuild test -scheme IntentionalUITests -destination 'platform=iOS,name=iPhone 15'
+```bash
+# Build for simulator (limited functionality)
+xcodebuild -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15' build
+
+# Build for physical device (full functionality) 
+xcodebuild -project IN10T.xcodeproj -scheme IN10T -destination 'generic/platform=iOS' build
+
+# Run unit tests
+xcodebuild test -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15'
 ```
+
+**Manual Testing Checklist:**
+1. ✅ App launches without crashes
+2. ✅ Firebase configuration loads (check console logs)
+3. ✅ Authentication screens appear
+4. ✅ Family Controls permission can be requested
+5. ✅ App selection screen (FamilyActivityPicker) works
+6. ✅ Sessions can be started/stopped
+7. ✅ Live Activities appear during sessions
+8. ✅ Shield screens block selected apps
 
 ## Usage Flow
 

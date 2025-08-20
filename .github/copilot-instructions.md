@@ -1,10 +1,10 @@
-# Intentional - iOS Screen Time Control App
+# IN10T - iOS Screen Time Control App
 
 Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.
 
 ## Current Repository State
 This repository contains a complete iOS app implementation with:
-- Intentional.xcodeproj (Xcode project)
+- IN10T.xcodeproj (Xcode project)
 - 27 Swift source files across main app and 3 extensions
 - Swift Package Manager dependencies (Firebase, Google Sign-In)
 - Complete feature modules for Screen Time control functionality
@@ -18,7 +18,7 @@ ALWAYS run these commands in exact order:
    # Replace <your-repository-url> with your fork or the canonical repo as appropriate
    git clone <your-repository-url>
    cd in10t
-   open Intentional.xcodeproj
+   open IN10T.xcodeproj
    ```
 
 2. **Resolve Swift Package Manager dependencies**:
@@ -39,15 +39,15 @@ ALWAYS run these commands in exact order:
 2. **Build from command line**:
    ```bash
    # Main app target - takes 10-15 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
-   xcodebuild -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15' build
+   xcodebuild -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15' build
    
    # Main app target - takes 10-15 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
    # Timeout is set conservatively to account for possible delays in dependency resolution, network issues, or CI/CD resource contention.
-   xcodebuild -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15' build
+   xcodebuild -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15' build
    
    # All targets including extensions - takes 15-20 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
    # Timeout is set conservatively to account for possible delays in dependency resolution, network issues, or CI/CD resource contention.
-   xcodebuild -project Intentional.xcodeproj -alltargets -destination 'platform=iOS Simulator,name=iPhone 15' build
+   xcodebuild -project IN10T.xcodeproj -alltargets -destination 'platform=iOS Simulator,name=iPhone 15' build
    ```
 
 ### Testing
@@ -56,13 +56,13 @@ ALWAYS run these commands in exact order:
 1. **Unit Tests** (Simulator only):
    ```bash
    # Takes 5-10 minutes. NEVER CANCEL. Set timeout to 30+ minutes.
-   xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+   xcodebuild test -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15'
    ```
 
 2. **Physical Device Testing** (REQUIRED for Screen Time APIs):
    ```bash
    # Replace iPhone-15 with your device name. Takes 10-15 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
-   xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS,name=Your-Device-Name'
+   xcodebuild test -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS,name=Your-Device-Name'
    ```
 
 3. **Manual Testing Scenarios** (REQUIRED after any changes):
@@ -81,13 +81,13 @@ ALWAYS run these validation steps before committing changes:
 1. **Build validation**:
    ```bash
    # Clean build - takes 15-20 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
-   xcodebuild clean build -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+   xcodebuild clean build -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15'
    ```
 
 2. **Test validation**:
    ```bash
    # Unit tests - takes 10-15 minutes. NEVER CANCEL. Set timeout to 45+ minutes.
-   xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+   xcodebuild test -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15'
    ```
 
 3. **SwiftLint validation** (if configured):
@@ -101,7 +101,7 @@ ALWAYS run these validation steps before committing changes:
 4. **Package dependency validation**:
    ```bash
    # Resolve packages - takes 2-5 minutes. NEVER CANCEL. Set timeout to 15+ minutes.
-   xcodebuild -resolvePackageDependencies -project Intentional.xcodeproj
+   xcodebuild -resolvePackageDependencies -project IN10T.xcodeproj
    ```
 
 ### MANDATORY Manual Testing Scenarios
@@ -181,10 +181,10 @@ swift package --version
 ### Project Information
 ```bash
 # List all schemes and targets
-xcodebuild -list -project Intentional.xcodeproj
+xcodebuild -list -project IN10T.xcodeproj
 
 # Show build settings
-xcodebuild -showBuildSettings -project Intentional.xcodeproj -target Intentional
+xcodebuild -showBuildSettings -project IN10T.xcodeproj -target Intentional
 
 # List available simulators
 xcrun simctl list devices available
@@ -196,7 +196,7 @@ xcrun simctl list devices available
 ```bash
 # Reset package cache if issues occur - takes 2-3 minutes. NEVER CANCEL. Set timeout to 10+ minutes.
 rm -rf ~/Library/Developer/Xcode/DerivedData
-xcodebuild -resolvePackageDependencies -project Intentional.xcodeproj
+xcodebuild -resolvePackageDependencies -project IN10T.xcodeproj
 
 # Update packages (in Xcode): File → Packages → Update to Latest Package Versions
 ```
@@ -219,7 +219,7 @@ xcrun simctl shutdown all
 ### Build Troubleshooting
 ```bash
 # Clean build folder - takes 1-2 minutes
-xcodebuild clean -project Intentional.xcodeproj -scheme Intentional
+xcodebuild clean -project IN10T.xcodeproj -scheme IN10T
 
 # Delete derived data
 rm -rf ~/Library/Developer/Xcode/DerivedData
@@ -234,7 +234,7 @@ This repository contains the "Intentional" iOS app - a complete session-based sc
 
 ```
 /
-├── Intentional.xcodeproj/         # Xcode project file
+├── IN10T.xcodeproj/         # Xcode project file
 ├── Package.swift                  # Swift Package Manager dependencies
 ├── Sources/
 │   ├── App/                      # Main iOS app target (27 Swift files)
@@ -277,10 +277,10 @@ This repository contains the "Intentional" iOS app - a complete session-based sc
 - **Dependencies**: Firebase Auth, Firebase Firestore, Google Sign-In
 - **Extensions Required**: 3 app extensions for Screen Time functionality
 - **Bundle IDs**:
-  - Main: `com.jlieb10.intentional`
-  - DeviceActivityMonitor: `com.jlieb10.intentional.DeviceActivityMonitor`
-  - ShieldConfiguration: `com.jlieb10.intentional.ShieldConfiguration`
-  - ShieldAction: `com.jlieb10.intentional.ShieldAction`
+  - Main: `com.jlieb10.in10t`
+  - DeviceActivityMonitor: `com.jlieb10.in10t.DeviceActivityMonitor`
+  - ShieldConfiguration: `com.jlieb10.in10t.ShieldConfiguration`
+  - ShieldAction: `com.jlieb10.in10t.ShieldAction`
 
 ## Timing Expectations and Timeouts
 
@@ -335,7 +335,7 @@ Error: Package resolution failed / Dependencies could not be resolved
 rm -rf ~/Library/Developer/Xcode/DerivedData
 rm -rf ~/Library/Caches/org.swift.swiftpm
 # Re-resolve in Xcode: File → Packages → Reset Package Caches
-xcodebuild -resolvePackageDependencies -project Intentional.xcodeproj
+xcodebuild -resolvePackageDependencies -project IN10T.xcodeproj
 ```
 
 #### Family Controls Entitlement Missing
@@ -354,9 +354,9 @@ Error: Extension bundle identifier does not match expected format
 **Solution**:
 ```bash
 # Verify bundle IDs match expected format:
-# Main: com.jlieb10.intentional
-# Extensions: com.jlieb10.intentional.[ExtensionName]
-xcodebuild -showBuildSettings -project Intentional.xcodeproj | grep PRODUCT_BUNDLE_IDENTIFIER
+# Main: com.jlieb10.in10t
+# Extensions: com.jlieb10.in10t.[ExtensionName]
+xcodebuild -showBuildSettings -project IN10T.xcodeproj | grep PRODUCT_BUNDLE_IDENTIFIER
 ```
 
 #### Code Signing Issues
@@ -365,7 +365,7 @@ Error: Code signing failed / No valid provisioning profile found
 ```
 **Solution**:
 - Select development team for ALL targets (main app + 3 extensions)
-- Ensure App Group ID exists: `group.com.jlieb10.intentional`
+- Ensure App Group ID exists: `group.com.jlieb10.in10t`
 - Add App Group capability to all targets
 
 ### Runtime Issues
@@ -424,7 +424,7 @@ xcrun simctl erase "iPhone 15"
 
 ### Required Entitlements (Must Be Approved by Apple)
 1. **Family Controls** - Request from Apple Developer Portal
-2. **App Groups** - `group.com.jlieb10.intentional`  
+2. **App Groups** - `group.com.jlieb10.in10t`  
 3. **ActivityKit** - For Live Activities countdown timers
 
 ### Development Team Setup Requirements
@@ -461,12 +461,12 @@ ALWAYS run this complete validation sequence:
 
 1. **Clean Build** (15-20 minutes):
    ```bash
-   xcodebuild clean build -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+   xcodebuild clean build -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15'
    ```
 
 2. **Unit Tests** (10-15 minutes):
    ```bash
-   xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+   xcodebuild test -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15'
    ```
 
 3. **Physical Device Deploy and Test** (MANDATORY for Screen Time features):
@@ -483,10 +483,10 @@ ALWAYS run this complete validation sequence:
 Run complete validation suite:
 ```bash
 # Full clean build with all targets - takes 20-25 minutes. NEVER CANCEL. Set timeout to 90+ minutes.
-xcodebuild clean build -project Intentional.xcodeproj -alltargets -destination 'platform=iOS Simulator,name=iPhone 15'
+xcodebuild clean build -project IN10T.xcodeproj -alltargets -destination 'platform=iOS Simulator,name=iPhone 15'
 
 # Complete test suite - takes 25-35 minutes. NEVER CANCEL. Set timeout to 120+ minutes.
-xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+xcodebuild test -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15'
 ```
 
 ## Key File Locations to Know
@@ -500,7 +500,7 @@ xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 
 
 ### Configuration Files
 - `Package.swift` - Swift Package Manager dependencies
-- `Intentional.xcodeproj/project.pbxproj` - Xcode project configuration
+- `IN10T.xcodeproj/project.pbxproj` - Xcode project configuration
 - `Sources/App/Environment/FirebaseConfig.swift` - Firebase setup
 - `.gitignore` - Configured for iOS development
 
@@ -516,31 +516,31 @@ xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 
 ### Essential Build Commands (Copy-Paste Ready)
 ```bash
 # Clean build everything - takes 20-25 minutes. NEVER CANCEL. Set timeout to 90+ minutes.
-xcodebuild clean build -project Intentional.xcodeproj -alltargets -destination 'platform=iOS Simulator,name=iPhone 15'
+xcodebuild clean build -project IN10T.xcodeproj -alltargets -destination 'platform=iOS Simulator,name=iPhone 15'
 
 # Run unit tests - takes 10-15 minutes. NEVER CANCEL. Set timeout to 45+ minutes.
-xcodebuild test -project Intentional.xcodeproj -scheme Intentional -destination 'platform=iOS Simulator,name=iPhone 15'
+xcodebuild test -project IN10T.xcodeproj -scheme IN10T -destination 'platform=iOS Simulator,name=iPhone 15'
 
 # Build for physical device - takes 15-20 minutes. NEVER CANCEL. Set timeout to 60+ minutes.
-xcodebuild build -project Intentional.xcodeproj -scheme Intentional -destination 'generic/platform=iOS'
+xcodebuild build -project IN10T.xcodeproj -scheme IN10T -destination 'generic/platform=iOS'
 
 # Clear all caches when build issues occur - takes 3-5 minutes. NEVER CANCEL. Set timeout to 20+ minutes.
-rm -rf ~/Library/Developer/Xcode/DerivedData && rm -rf ~/Library/Caches/org.swift.swiftpm && xcodebuild -resolvePackageDependencies -project Intentional.xcodeproj
+rm -rf ~/Library/Developer/Xcode/DerivedData && rm -rf ~/Library/Caches/org.swift.swiftpm && xcodebuild -resolvePackageDependencies -project IN10T.xcodeproj
 ```
 
 ### Project Inspection Commands
 ```bash
 # List all available schemes and targets
-xcodebuild -list -project Intentional.xcodeproj
+xcodebuild -list -project IN10T.xcodeproj
 
 # Show build settings for main target
-xcodebuild -showBuildSettings -project Intentional.xcodeproj -target Intentional
+xcodebuild -showBuildSettings -project IN10T.xcodeproj -target Intentional
 
 # List available simulators
 xcrun simctl list devices available | grep iPhone
 
 # Check bundle identifiers for all targets
-xcodebuild -showBuildSettings -project Intentional.xcodeproj | grep PRODUCT_BUNDLE_IDENTIFIER
+xcodebuild -showBuildSettings -project IN10T.xcodeproj | grep PRODUCT_BUNDLE_IDENTIFIER
 ```
 
 ## Development Tips
@@ -592,7 +592,7 @@ git status && git log --oneline -10
 ## Emergency Troubleshooting
 
 ### When Nothing Builds
-1. Clean everything: `xcodebuild clean -project Intentional.xcodeproj`
+1. Clean everything: `xcodebuild clean -project IN10T.xcodeproj`
 2. Quit Xcode completely
 3. Delete derived data: `rm -rf ~/Library/Developer/Xcode/DerivedData`  
 4. Clear SPM cache: `rm -rf ~/Library/Caches/org.swift.swiftpm`
@@ -603,7 +603,7 @@ git status && git log --oneline -10
 ### When Screen Time APIs Stop Working
 1. Verify physical device is being used (not Simulator)
 2. Check Family Controls permission: Settings → Screen Time → Family Controls
-3. Verify App Group: `group.com.jlieb10.intentional` exists and is enabled
+3. Verify App Group: `group.com.jlieb10.in10t` exists and is enabled
 4. Check all bundle IDs are correctly signed with development team
 5. Try deleting and reinstalling app on device
 6. Check Apple Developer Portal for entitlement status
