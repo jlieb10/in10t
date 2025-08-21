@@ -1,5 +1,23 @@
 # Development Setup Guide
 
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Initial Setup](#initial-setup)
+- [Development Workflow](#development-workflow)
+- [Deployment](#deployment)
+- [Architecture Decision Records](#architecture-decision-records)
+- [Troubleshooting](#troubleshooting)
+- [Beginner-Friendly Setup Guide](#beginner-friendly-setup-guide)
+  - [Bundle ID Setup](#bundle-id-setup)
+  - [App Groups Setup](#app-groups-setup)
+  - [Entitlements Guide](#entitlements-guide)
+  - [Firebase Setup](#firebase-setup)
+  - [Subscription Setup](#subscription-setup)
+  - [First-Time Xcode Setup](#first-time-xcode-setup)
+- [Performance Guidelines](#performance-guidelines)
+- [Security Considerations](#security-considerations)
+
 ## Prerequisites
 
 ### Required Tools
@@ -251,6 +269,372 @@ xcodebuild -resolvePackageDependencies
 
 ## Beginner-Friendly Setup Guide
 
+## Beginner-Friendly Setup Guide
+
+### Bundle ID Setup
+
+Bundle Identifiers are unique strings that identify your app and its components across Apple's systems. Think of them like domain names for your app.
+
+#### Creating Bundle IDs in Apple Developer Portal
+
+1. **Login to Apple Developer Portal**: 
+   - Go to [developer.apple.com/account](https://developer.apple.com/account)
+   - Sign in with your Apple Developer account
+
+2. **Navigate to Identifiers**:
+   - Click "Certificates, Identifiers & Profiles"
+   - Click "Identifiers" in the sidebar
+   - Click the "+" button (top-left)
+
+3. **Create App IDs** (create all 4):
+   
+   **Main App ID:**
+   - Select "App IDs" → "App" → Continue
+   - **Description**: "IN10T Main App"
+   - **Bundle ID**: Explicit → `com.jlieb10.in10t`
+   - **Capabilities**: Check "Family Controls", "App Groups", "Sign In with Apple"
+   - Register
+   
+   **DeviceActivityMonitor Extension:**
+   - **Description**: "IN10T Device Activity Monitor"
+   - **Bundle ID**: `com.jlieb10.in10t.DeviceActivityMonitor`
+   - **Capabilities**: Check "App Groups" only
+   - Register
+   
+   **ShieldConfiguration Extension:**
+   - **Description**: "IN10T Shield Configuration"
+   - **Bundle ID**: `com.jlieb10.in10t.ShieldConfiguration`
+   - **Capabilities**: Check "App Groups" only
+   - Register
+   
+   **ShieldAction Extension:**
+   - **Description**: "IN10T Shield Action"
+   - **Bundle ID**: `com.jlieb10.in10t.ShieldAction`
+   - **Capabilities**: Check "App Groups" only
+   - Register
+
+#### Configuring Bundle IDs in Xcode
+
+1. **Open your project in Xcode**: `open IN10T.xcodeproj`
+2. **Select project** in navigator (top item)
+3. **For each target**:
+   - Select target → General tab
+   - **Bundle Identifier**: Enter the matching ID from Apple Developer Portal
+   - **Team**: Select your development team
+   - **Signing & Capabilities**: Verify "Automatically manage signing" is checked
+
+**⚠️ Common Issues:**
+- Bundle IDs must be lowercase with no spaces or special characters except dots and hyphens
+- Each extension's Bundle ID must start with the main app's Bundle ID
+- If you change Bundle IDs, you'll need to update them in Apple Developer Portal too
+
+### App Groups Setup
+
+App Groups allow your main app and extensions to share data securely. This is essential for Screen Time functionality.
+
+#### Creating App Group in Apple Developer Portal
+
+1. **Navigate to Identifiers**:
+   - [developer.apple.com/account/resources/identifiers](https://developer.apple.com/account/resources/identifiers)
+   - Click "Identifiers" → "App Groups" (from dropdown) → "+"
+
+2. **Create App Group**:
+   - **Description**: "IN10T Data Sharing Group"
+   - **Identifier**: `group.com.jlieb10.in10t`
+   - **Register**
+
+3. **Add App Group to each App ID**:
+   - Go back to "App IDs" in the dropdown
+   - **For each of your 4 App IDs**:
+     - Click App ID → "Edit"
+     - Check "App Groups" capability
+     - Configure → Check your `group.com.jlieb10.in10t`
+     - Save
+
+#### Adding App Groups in Xcode
+
+1. **For each target** (main app + 3 extensions):
+   - Select target → Signing & Capabilities
+   - Click "+ Capability" (top-left)
+   - Double-click "App Groups"
+   - Check the box for `group.com.jlieb10.in10t`
+
+2. **Verify configuration**:
+   - You should see "App Groups" capability for all 4 targets
+   - Each should have `group.com.jlieb10.in10t` enabled
+
+**⚠️ Common Issues:**
+- Must be added to ALL targets (main app + all 3 extensions)
+- Group identifier must start with "group."
+- If you see "Unable to access App Group container" errors, check this setup
+
+### Entitlements Guide
+
+Entitlements are special permissions that allow your app to use specific iOS features. Family Controls is a restricted entitlement requiring Apple approval.
+
+#### Requesting Family Controls Entitlement
+
+1. **Prepare your request**:
+   - **App Description**: Explain that IN10T is a screen time control app
+   - **Use Case**: "Session-based app blocking using ManagedSettings and DeviceActivity"
+   - **Benefits**: "Helps users build healthy digital habits through mindful app usage"
+
+2. **Submit request**:
+   - Go to [developer.apple.com/contact/request/family-controls](https://developer.apple.com/contact/request/family-controls)
+   - Fill out the form with your app's details
+   - **Processing time**: 1-2 weeks typically
+
+3. **After approval**:
+   - You'll receive email confirmation
+   - The entitlement becomes available in Apple Developer Portal
+   - You can then add it to your App ID and use it in Xcode
+
+#### Adding Entitlements in Xcode (After Approval)
+
+1. **Family Controls** (Main app only):
+   - Select main app target → Signing & Capabilities
+   - Click "+ Capability" → "Family Controls"
+
+2. **Other required capabilities**:
+   - **App Groups**: All targets (covered above)
+   - **Background Modes**: Main app (if using background processing)
+   - **ActivityKit**: Main app (for Live Activities)
+
+**⚠️ Important Notes:**
+- Family Controls entitlement can take weeks to approve
+- You can develop most of the app without it, but Screen Time features won't work
+- Extensions don't need Family Controls entitlement, only the main app
+- Test your entitlement approval by building and running on device
+
+### Firebase Setup
+
+Firebase provides authentication and cloud database services. Here's a complete setup guide:
+
+#### Creating Firebase Project
+
+1. **Go to Firebase Console**:
+   - Visit [console.firebase.google.com](https://console.firebase.google.com)
+   - Click "Create a project"
+
+2. **Project configuration**:
+   - **Project name**: "IN10T" (or any name you prefer)
+   - **Project ID**: Will be auto-generated (e.g., `in10t-12345`)
+   - **Google Analytics**: Disable for now (can enable later)
+   - Click "Create project"
+
+#### Adding iOS App to Firebase
+
+1. **Add app**:
+   - In your Firebase project, click "Add app" → iOS icon
+   - **iOS bundle ID**: `com.jlieb10.in10t` (must match exactly)
+   - **App nickname**: "IN10T iOS" (optional, for your reference)
+   - **App Store ID**: Leave blank for now
+   - Click "Register app"
+
+2. **Download config file**:
+   - Download `GoogleService-Info.plist`
+   - **IMPORTANT**: This file contains your Firebase keys
+
+#### Adding GoogleService-Info.plist to Xcode
+
+1. **Add to project**:
+   - In Xcode, right-click your project root (next to Sources folder)
+   - Choose "Add Files to [ProjectName]"
+   - Select the downloaded `GoogleService-Info.plist`
+   - ✅ Check "Copy items if needed"
+   - ✅ Check "Add to target" for the main app target only
+   - Click "Add"
+
+2. **Verify placement**:
+   - File should appear in your project navigator at the root level
+   - Should NOT be inside Sources folder
+   - Should have target membership only for main app (not extensions)
+
+#### Enabling Firebase Services
+
+**Authentication:**
+1. **Enable Authentication**:
+   - Firebase Console → Build → Authentication
+   - Click "Get started"
+   - Go to "Sign-in method" tab
+
+2. **Configure providers**:
+   
+   **Apple Sign-In:**
+   - Click "Apple" → Enable toggle
+   - No additional configuration needed
+   - Save
+   
+   **Google Sign-In:**
+   - Click "Google" → Enable toggle  
+   - **Project support email**: Your email address
+   - Save and copy the "Web client ID" (you'll need this)
+   
+   **Email/Password:**
+   - Click "Email/Password" → Enable toggle
+   - Save
+
+**Firestore Database:**
+1. **Create database**:
+   - Firebase Console → Build → Firestore Database
+   - Click "Create database"
+   - **Security rules**: Start in production mode (we'll configure rules later)
+   - **Location**: Choose closest to your users (e.g., europe-west1)
+   - Click "Done"
+
+2. **Configure security rules** (in Firestore → Rules):
+   ```javascript
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       // Users can read/write their own data
+       match /users/{userId} {
+         allow read, write: if request.auth != null && request.auth.uid == userId;
+         
+         // Allow access to user's subcollections
+         match /{document=**} {
+           allow read, write: if request.auth != null && request.auth.uid == userId;
+         }
+       }
+     }
+   }
+   ```
+
+**⚠️ Security Note**: These rules allow authenticated users to access only their own data.
+
+#### Testing Firebase Integration
+
+1. **Build and run your app** on a physical device
+2. **Check Xcode console** for Firebase initialization messages:
+   ```
+   [Firebase] API key found, Firebase app will be configured
+   ```
+3. **Test authentication** by trying to sign in with Apple or Google
+4. **Check Firebase Console** → Authentication → Users to see if accounts are created
+
+**Common Firebase Issues:**
+
+**"GoogleService-Info.plist not found":**
+- Ensure file is in project root (not in Sources folder)
+- Check target membership is set to main app only
+
+**"Invalid Bundle ID":**
+- Bundle ID in Xcode must exactly match what you configured in Firebase
+- Check General tab of main app target
+
+**Authentication not working:**
+- Verify you enabled the sign-in methods in Firebase Console
+- Check that your Bundle ID is correct in both Xcode and Firebase
+- For Google Sign-In, ensure you have the latest GoogleService-Info.plist
+
+### Subscription Setup
+
+StoreKit 2 subscriptions require configuration in App Store Connect. Here's a complete guide:
+
+#### App Store Connect Basic Setup
+
+1. **Create app in App Store Connect**:
+   - Go to [appstoreconnect.apple.com](https://appstoreconnect.apple.com)
+   - My Apps → "+" → New App
+   - **iOS** platform
+   - **Name**: "IN10T" or your preferred name
+   - **Primary Language**: English (or your language)
+   - **Bundle ID**: Select `com.jlieb10.in10t` from dropdown
+   - **SKU**: `com.jlieb10.in10t` (or any unique identifier)
+
+2. **Complete required information**:
+   - **Privacy Policy URL**: Required for any app with user accounts
+   - **Category**: Productivity
+   - **Age Rating**: Complete the questionnaire (likely 4+ for this app)
+
+#### Creating Subscription Group
+
+Subscriptions must be organized in groups. Even with just monthly/annual options, you need a group:
+
+1. **Navigate to subscriptions**:
+   - Your app → Features → In-App Purchases
+   - Click "Manage" next to Auto-Renewable Subscriptions
+
+2. **Create subscription group**:
+   - Click "Create Subscription Group"
+   - **Reference Name**: "IN10T Pro Subscription"
+   - **Display Name**: "IN10T Pro" (users will see this)
+   - Save
+
+#### Creating Subscription Products
+
+**Monthly Subscription:**
+
+1. **Create subscription**:
+   - In your subscription group, click "+"
+   - **Product ID**: `intentional_pro_monthly` (must match your code)
+   - **Reference Name**: "Monthly Pro Subscription"
+   - **Subscription Duration**: 1 Month
+
+2. **Subscription Information**:
+   - **Display Name**: "Monthly Pro"
+   - **Description**: "Unlimited apps and sessions with premium features"
+   - **Review Screenshot**: Upload a screenshot of your paywall
+
+3. **Pricing**:
+   - Click "Add Pricing"
+   - **Price**: £4.99 (or your preferred price)
+   - **Territory**: Select countries where you'll sell
+   - Save
+
+4. **Introductory Offers**:
+   - **Offer Type**: Free Trial
+   - **Duration**: 1 Week
+   - **Eligible**: New subscribers only
+   - This gives users 7 days free before first payment
+
+**Annual Subscription:**
+
+1. **Create subscription**:
+   - **Product ID**: `intentional_pro_annual`
+   - **Reference Name**: "Annual Pro Subscription"  
+   - **Subscription Duration**: 1 Year
+
+2. **Pricing and setup**:
+   - **Display Name**: "Annual Pro"
+   - **Description**: "Unlimited apps and sessions with premium features - Save 50%!"
+   - **Price**: £29.99 (or your preferred price)
+   - **Introductory Offer**: 1 Week Free Trial
+
+#### Subscription Review Process
+
+1. **Submit for review**:
+   - Both subscriptions must be submitted for review before testing
+   - In each subscription, click "Submit for Review"
+   - **Review Notes**: Explain that it's a screen time control app
+
+2. **Testing before approval**:
+   - Create sandbox test accounts in App Store Connect
+   - Users → Sandbox Testers → "+"
+   - Test purchases with these accounts on development builds
+
+3. **Review timeline**:
+   - Subscriptions typically take 24-48 hours to review
+   - You'll get email notification when approved
+   - Can test immediately with sandbox accounts
+
+#### Code Integration Verification
+
+Your subscription product IDs are already configured in the code:
+
+**Check Sources/App/Environment/AppGroup.swift:**
+```swift
+// These should match your App Store Connect product IDs
+static let monthlySubscriptionID = "intentional_pro_monthly"
+static let annualSubscriptionID = "intentional_pro_annual"
+```
+
+**⚠️ Important Notes:**
+- Product IDs in code must exactly match App Store Connect
+- Prices are managed in App Store Connect, not in code
+- Free trial is configured in App Store Connect, not in code
+- Test subscriptions thoroughly before releasing
+
 ### First-Time Xcode Setup
 
 1. **Install Xcode 15.0+** from Mac App Store
@@ -330,3 +714,37 @@ The project should now show all files properly organized under Sources/. If you 
 - Only process usage tokens, never app content
 - Respect user privacy boundaries
 - Follow Apple's Screen Time guidelines
+
+## Additional Resources
+
+### Apple Documentation
+- **Family Controls Framework**: [developer.apple.com/documentation/familycontrols](https://developer.apple.com/documentation/familycontrols)
+- **Screen Time API Guide**: [developer.apple.com/documentation/screentime](https://developer.apple.com/documentation/screentime) 
+- **DeviceActivity Framework**: [developer.apple.com/documentation/deviceactivity](https://developer.apple.com/documentation/deviceactivity)
+- **ManagedSettings Framework**: [developer.apple.com/documentation/managedsettings](https://developer.apple.com/documentation/managedsettings)
+- **StoreKit 2**: [developer.apple.com/documentation/storekit](https://developer.apple.com/documentation/storekit)
+- **App Groups**: [developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups)
+
+### Firebase Documentation
+- **iOS Setup Guide**: [firebase.google.com/docs/ios/setup](https://firebase.google.com/docs/ios/setup)
+- **Authentication**: [firebase.google.com/docs/auth/ios/start](https://firebase.google.com/docs/auth/ios/start)
+- **Firestore**: [firebase.google.com/docs/firestore/quickstart](https://firebase.google.com/docs/firestore/quickstart)
+- **Security Rules**: [firebase.google.com/docs/firestore/security/get-started](https://firebase.google.com/docs/firestore/security/get-started)
+
+### App Store Connect Guides  
+- **Managing Subscriptions**: [help.apple.com/app-store-connect](https://help.apple.com/app-store-connect)
+- **TestFlight**: [developer.apple.com/testflight/](https://developer.apple.com/testflight/)
+- **App Review Guidelines**: [developer.apple.com/app-store/review/guidelines/](https://developer.apple.com/app-store/review/guidelines/)
+
+### Development Tools
+- **Xcode Documentation**: [developer.apple.com/xcode/](https://developer.apple.com/xcode/)
+- **iOS Simulator**: [developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device)
+- **Instruments**: [developer.apple.com/xcode/features/](https://developer.apple.com/xcode/features/)
+- **SwiftLint**: [github.com/realm/SwiftLint](https://github.com/realm/SwiftLint)
+- **Fastlane**: [fastlane.tools](https://fastlane.tools)
+
+### Community Resources
+- **Apple Developer Forums**: [developer.apple.com/forums/](https://developer.apple.com/forums/)
+- **Swift Forums**: [forums.swift.org](https://forums.swift.org)
+- **Reddit iOS Programming**: [reddit.com/r/iOSProgramming](https://reddit.com/r/iOSProgramming)
+- **Stack Overflow iOS**: [stackoverflow.com/questions/tagged/ios](https://stackoverflow.com/questions/tagged/ios)
