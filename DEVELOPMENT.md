@@ -714,3 +714,37 @@ The project should now show all files properly organized under Sources/. If you 
 - Only process usage tokens, never app content
 - Respect user privacy boundaries
 - Follow Apple's Screen Time guidelines
+
+## Additional Resources
+
+### Apple Documentation
+- **Family Controls Framework**: [developer.apple.com/documentation/familycontrols](https://developer.apple.com/documentation/familycontrols)
+- **Screen Time API Guide**: [developer.apple.com/documentation/screentime](https://developer.apple.com/documentation/screentime) 
+- **DeviceActivity Framework**: [developer.apple.com/documentation/deviceactivity](https://developer.apple.com/documentation/deviceactivity)
+- **ManagedSettings Framework**: [developer.apple.com/documentation/managedsettings](https://developer.apple.com/documentation/managedsettings)
+- **StoreKit 2**: [developer.apple.com/documentation/storekit](https://developer.apple.com/documentation/storekit)
+- **App Groups**: [developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups)
+
+### Firebase Documentation
+- **iOS Setup Guide**: [firebase.google.com/docs/ios/setup](https://firebase.google.com/docs/ios/setup)
+- **Authentication**: [firebase.google.com/docs/auth/ios/start](https://firebase.google.com/docs/auth/ios/start)
+- **Firestore**: [firebase.google.com/docs/firestore/quickstart](https://firebase.google.com/docs/firestore/quickstart)
+- **Security Rules**: [firebase.google.com/docs/firestore/security/get-started](https://firebase.google.com/docs/firestore/security/get-started)
+
+### App Store Connect Guides  
+- **Managing Subscriptions**: [help.apple.com/app-store-connect](https://help.apple.com/app-store-connect)
+- **TestFlight**: [developer.apple.com/testflight/](https://developer.apple.com/testflight/)
+- **App Review Guidelines**: [developer.apple.com/app-store/review/guidelines/](https://developer.apple.com/app-store/review/guidelines/)
+
+### Development Tools
+- **Xcode Documentation**: [developer.apple.com/xcode/](https://developer.apple.com/xcode/)
+- **iOS Simulator**: [developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device)
+- **Instruments**: [developer.apple.com/xcode/features/](https://developer.apple.com/xcode/features/)
+- **SwiftLint**: [github.com/realm/SwiftLint](https://github.com/realm/SwiftLint)
+- **Fastlane**: [fastlane.tools](https://fastlane.tools)
+
+### Community Resources
+- **Apple Developer Forums**: [developer.apple.com/forums/](https://developer.apple.com/forums/)
+- **Swift Forums**: [forums.swift.org](https://forums.swift.org)
+- **Reddit iOS Programming**: [reddit.com/r/iOSProgramming](https://reddit.com/r/iOSProgramming)
+- **Stack Overflow iOS**: [stackoverflow.com/questions/tagged/ios](https://stackoverflow.com/questions/tagged/ios)

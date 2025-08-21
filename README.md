@@ -101,6 +101,31 @@ IN10T/
 
 **New to iOS development? Follow this path:**
 
+```
+1. Setup Environment (30 min)
+   ↓
+2. Clone & Explore (15 min)  
+   ↓
+3. Request Entitlements (5 min + 1-2 weeks wait)
+   ↓
+4. Configure Services (60 min)
+   ↓ 
+5. First Build (30 min)
+   ↓
+6. Test Basic Features (30 min)
+   ↓
+7. Wait for Entitlements ⏳
+   ↓
+8. Test Screen Time Features (60 min)
+```
+
+**Parallel track while waiting for entitlements:**
+- Develop UI components
+- Implement authentication
+- Build subscription flow
+- Create tests
+- Design app icon and assets
+
 1. ✅ **Setup environment** (30 minutes): Install Xcode, create Apple Developer account
 2. ✅ **Clone and explore** (15 minutes): Download code, open in Xcode, explore structure  
 3. ✅ **Request entitlements** (5 minutes to submit, 1-2 weeks processing): Submit Family Controls request
@@ -111,6 +136,12 @@ IN10T/
 8. ✅ **Test Screen Time features** (60 minutes): Full functionality testing after approval
 
 **Total setup time**: ~3 hours active work + 1-2 weeks waiting
+
+**💡 Pro Tips:**
+- Start with entitlement request first (longest wait time)
+- Use sandbox Apple ID for subscription testing
+- Keep physical device connected during development
+- Save all configuration values (Bundle IDs, Firebase keys) in a note
 
 ## Table of Contents
 
@@ -678,11 +709,32 @@ If you're still stuck after trying these solutions:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Support
+## Support & Resources
 
-- **Documentation**: See [DEVELOPMENT.md](DEVELOPMENT.md) and this README
+### Documentation
+- **Setup Guide**: This README covers basic setup and common issues
+- **Advanced Development**: [DEVELOPMENT.md](DEVELOPMENT.md) has detailed technical guides  
+- **Apple Documentation**: 
+  - [Family Controls Framework](https://developer.apple.com/documentation/familycontrols)
+  - [Screen Time API Guide](https://developer.apple.com/documentation/screentime)
+  - [StoreKit 2 Documentation](https://developer.apple.com/documentation/storekit)
+
+### Getting Help
 - **Issues**: Report bugs and feature requests via [GitHub Issues](https://github.com/jlieb10/in10t/issues)  
 - **Discussions**: Join the conversation in [GitHub Discussions](https://github.com/jlieb10/in10t/discussions)
+- **Apple Support**: [Apple Developer Forums](https://developer.apple.com/forums/) for Xcode and iOS issues
+
+### Community Resources
+- **Firebase Documentation**: [firebase.google.com/docs](https://firebase.google.com/docs)
+- **SwiftUI Tutorials**: [Apple's SwiftUI Tutorials](https://developer.apple.com/tutorials/swiftui)
+- **iOS Development**: [Apple Developer Documentation](https://developer.apple.com/documentation/)
+
+### Quick Reference
+- **Bundle IDs**: `com.jlieb10.in10t` (main), `.DeviceActivityMonitor`, `.ShieldConfiguration`, `.ShieldAction`
+- **App Group**: `group.com.jlieb10.in10t`
+- **Subscription IDs**: `intentional_pro_monthly`, `intentional_pro_annual`
+- **Minimum iOS**: 17.0+
+- **Xcode Version**: 15.0+
 
 ---
 
